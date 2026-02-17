@@ -1,0 +1,18 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: istio-cni
+  namespace: istio-system
+spec:
+  # helm install istio-cni istio/cni -n istio-system --set profile=ambient
+  releaseName: istio-cni
+  interval: 15m
+  chart:
+    spec:
+      chart: cni
+      sourceRef:
+        kind: HelmRepository
+        name: istio
+        namespace: istio-system
+  values:
+    profile: ambient

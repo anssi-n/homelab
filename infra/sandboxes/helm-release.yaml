@@ -1,0 +1,16 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: kata-containers
+  namespace: kata-containers
+spec:
+  releaseName: kata-deploy
+  interval: 10m
+  chartRef:
+    kind: OCIRepository
+    name: kata-containers
+    namespace: kata-containers
+  valuesFrom:
+    - kind: ConfigMap
+      name: kata-container-values
+      valuesKey: kata-container-values.yaml

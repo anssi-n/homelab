@@ -1,0 +1,10 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: OCIRepository
+metadata:
+  name: kata-containers
+  namespace: kata-containers
+spec:
+  interval: 10m
+  url: oci://ghcr.io/kata-containers/kata-deploy-charts/kata-deploy
+  ref:
+    semver: ">=3.26.0"

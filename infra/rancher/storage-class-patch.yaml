@@ -1,0 +1,6 @@
+- op: replace #action
+  path: /reclaimPolicy
+  value: Delete
+- op: add #action
+  path: /metadata/annotations/defaultVolumeType
+  value: local

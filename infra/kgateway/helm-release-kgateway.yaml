@@ -1,0 +1,16 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: kgateway
+  namespace: kgateway-system
+spec:
+  releaseName: kgateway
+  interval: 10m
+  chartRef:
+    kind: OCIRepository
+    name: kgateway
+    namespace: kgateway-system
+  valuesFrom:
+    - kind: ConfigMap
+      name: kgateway-values
+      valuesKey: kgateway-values.yaml
