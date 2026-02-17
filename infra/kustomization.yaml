@@ -4,13 +4,13 @@ kind: Kustomization
 resources:
   - metallb/
   - metrics-server/
-  - traefik-ingress/
-  - envoy-gateway/
-  - kgateway/
-  - rancher/
-  - external-secrets-operator/
-  - cert-manager/
-  - istio/
+  # - traefik-ingress/
+  # - envoy-gateway/
+  # - kgateway/
+  # - rancher/
+  #  - external-secrets-operator/
+  #  - cert-manager/
+  # - istio/
   # - kyverno/
   # - opa-gatekeeper/
   # - sandboxes/
