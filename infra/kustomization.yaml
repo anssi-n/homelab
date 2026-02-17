@@ -7,8 +7,8 @@ resources:
   - traefik-ingress/
   - envoy-gateway/
   - kgateway/
-  - external-secrets-operator/
   - rancher/
+#  - external-secrets-operator/
 #  - cert-manager/
 # - istio/
 # - kyverno/
