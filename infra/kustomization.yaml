@@ -10,7 +10,7 @@ resources:
   - rancher/
   - istio/
   - cert-manager/
-#  - external-secrets-operator/
+  - external-secrets-operator/
 # - kyverno/
 # - opa-gatekeeper/
 # - sandboxes/
