@@ -5,7 +5,7 @@ resources:
   - oci-repository.yaml
   - helm-release.yaml
   - namespace.yaml
-  - clusterissuer.yaml
+  #- clusterissuer.yaml
 
 configMapGenerator:
   - name: cert-manager-values
