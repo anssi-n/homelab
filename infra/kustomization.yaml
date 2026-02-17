@@ -8,9 +8,9 @@ resources:
   - envoy-gateway/
   - kgateway/
   - rancher/
+  - istio/
 #  - external-secrets-operator/
 #  - cert-manager/
-# - istio/
 # - kyverno/
 # - opa-gatekeeper/
 # - sandboxes/
