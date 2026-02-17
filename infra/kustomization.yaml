@@ -8,13 +8,12 @@ resources:
   - envoy-gateway/
   - kgateway/
   - external-secrets-operator/
-  - cert-manager/
   - rancher/
-
-  # - istio/
-  # - kyverno/
-  # - opa-gatekeeper/
-  # - sandboxes/
-  # - nfs-external-provisioner/
-  # - opa-gatekeeper/
-  # - falco/
+#  - cert-manager/
+# - istio/
+# - kyverno/
+# - opa-gatekeeper/
+# - sandboxes/
+# - nfs-external-provisioner/
+# - opa-gatekeeper/
+# - falco/
