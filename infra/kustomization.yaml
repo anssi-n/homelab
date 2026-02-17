@@ -4,9 +4,9 @@ kind: Kustomization
 resources:
   - metallb/
   - metrics-server/
-  # - traefik-ingress/
-  # - envoy-gateway/
-  # - kgateway/
+  - traefik-ingress/
+  - envoy-gateway/
+  - kgateway/
   # - rancher/
   #  - external-secrets-operator/
   #  - cert-manager/
