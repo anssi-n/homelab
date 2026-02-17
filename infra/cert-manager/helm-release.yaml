@@ -11,5 +11,5 @@ spec:
     name: cert-manager
     namespace: cert-manager
   values:
-    replicaCount: 2
-    crds.enabled: true
+    crds:
+      enabled: true
