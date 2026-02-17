@@ -2,14 +2,13 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: cert-manager
 resources:
+  - namespace.yaml
   - oci-repository.yaml
   - helm-release.yaml
-  - namespace.yaml
   #- clusterissuer.yaml
-
-configMapGenerator:
-  - name: cert-manager-values
-    options:
-      disableNameSuffixHash: true
-    files:
-      - ./cert-manager-values.yaml
+# configMapGenerator:
+#   - name: cert-manager-values
+#     options:
+#       disableNameSuffixHash: true
+#     files:
+#       - ./cert-manager-values.yaml

@@ -10,7 +10,6 @@ spec:
     kind: OCIRepository
     name: cert-manager
     namespace: cert-manager
-  valuesFrom:
-    - kind: ConfigMap
-      name: cert-manager-values
-      valuesKey: cert-manager-values.yaml
+  values:
+    replicaCount: 2
+    crds.enabled: true

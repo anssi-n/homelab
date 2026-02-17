@@ -9,8 +9,8 @@ resources:
   - kgateway/
   - rancher/
   - istio/
+  - cert-manager/
 #  - external-secrets-operator/
-#  - cert-manager/
 # - kyverno/
 # - opa-gatekeeper/
 # - sandboxes/
