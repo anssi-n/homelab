@@ -11,9 +11,8 @@ resources:
   - istio/
   - cert-manager/
   - external-secrets-operator/
-# - kyverno/
+  - kyverno/
 # - opa-gatekeeper/
 # - sandboxes/
 # - nfs-external-provisioner/
-# - opa-gatekeeper/
 # - falco/
