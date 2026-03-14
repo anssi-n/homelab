@@ -1,0 +1,13 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: homelab
+  namespace: cnpg-cluster
+spec:
+  instances: 3
+  storage:
+    storageClass: local-path
+    size: 10Gi
+  walStorage:
+    storageClass: local-path
+    size: 2Gi
