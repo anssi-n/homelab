@@ -4,3 +4,4 @@ kind: Kustomization
 #resources: []
 resources:
   - tls/
+  - postgres-cluster/
