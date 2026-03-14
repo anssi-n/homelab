@@ -18,3 +18,5 @@ spec:
         ensure: present
         login: true
         superuser: false
+        passwordSecret:
+          name: homelab-huutoapp
