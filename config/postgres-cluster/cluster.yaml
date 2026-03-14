@@ -12,3 +12,9 @@ spec:
   walStorage:
     storageClass: local-path
     size: 1Gi
+  managed:
+    roles:
+      - name: huutoapp
+        ensure: present
+        login: true
+        superuser: false
