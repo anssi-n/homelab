@@ -4,3 +4,4 @@ namespace: cnpg-cluster
 resources:
   - namespace.yaml
   - cluster.yaml
+  - huutoapp-secret.yaml
