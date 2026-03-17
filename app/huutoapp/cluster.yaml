@@ -1,17 +1,17 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: homelab
-  namespace: cnpg-cluster
+  name: huutoapp-db
+  namespace: huutoapp
 spec:
   instances: 3
   primaryUpdateStrategy: unsupervised
   storage:
     storageClass: local-path
-    size: 5Gi
+    size: 50Mi
   walStorage:
     storageClass: local-path
-    size: 1Gi
+    size: 5Mi
   managed:
     roles:
       - name: huutoapp
@@ -19,4 +19,4 @@ spec:
         login: true
         superuser: false
         passwordSecret:
-          name: homelab-huutoapp
+          name: huutoapp-db-secret

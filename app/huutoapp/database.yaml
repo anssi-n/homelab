@@ -1,0 +1,10 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: huutoapp-db
+  namespace: huutoapp
+spec:
+  cluster:
+    name: huutoapp-db
+  name: huutoapp
+  owner: huutoapp

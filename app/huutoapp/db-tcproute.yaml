@@ -1,0 +1,12 @@
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: TCPRoute
+metadata:
+  name: huutoapp-db
+spec:
+  parentRefs:
+    - name: huutoapp-gateway
+      sectionName: huutoapp-db
+  rules:
+    - backendRefs:
+        - name: huutoapp-db-rw
+          port: 5432
