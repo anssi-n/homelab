@@ -6,7 +6,7 @@ metadata:
 spec:
   parentRefs:
     - name: longhorn-gw
-      sectionName: http
+      sectionName: https
       kind: Gateway
 
   rules:

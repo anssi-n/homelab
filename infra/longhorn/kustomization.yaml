@@ -7,3 +7,5 @@ resources:
   - helm-release.yaml
   - gateway.yaml
   - httproute.yaml
+  - basic-auth.yaml
+  - longhorn-tls-secret.yaml
