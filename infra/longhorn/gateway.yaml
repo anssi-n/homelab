@@ -8,6 +8,7 @@ spec:
   listeners:
     - protocol: HTTPS
       name: https
+      hostname: longhorn.k8s.anyman.homelab
       port: 443
       allowedRoutes:
         namespaces:
