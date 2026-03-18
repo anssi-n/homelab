@@ -5,6 +5,7 @@ resources:
   - namespace.yaml
   - huutoapp-db-secret.yaml
   - cluster.yaml
+  - redis.yaml
   - database.yaml
   - gateway.yaml
-  - db-httproute.yaml
+  - db-tcproute.yaml

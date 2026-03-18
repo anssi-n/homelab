@@ -2,6 +2,7 @@ apiVersion: gateway.networking.k8s.io/v1alpha2
 kind: TCPRoute
 metadata:
   name: huutoapp-db
+  namespace: huutoapp
 spec:
   parentRefs:
     - name: huutoapp-gateway
@@ -10,3 +11,17 @@ spec:
     - backendRefs:
         - name: huutoapp-db-rw
           port: 5432
+---
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: TCPRoute
+metadata:
+  name: redis
+  namespace: huutoapp
+spec:
+  parentRefs:
+    - name: huutoapp-gateway
+      sectionName: redis
+  rules:
+    - backendRefs:
+        - name: redis
+          port: 6379

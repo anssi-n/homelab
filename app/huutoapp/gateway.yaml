@@ -12,3 +12,9 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
+    - name: redis
+      protocol: TCP
+      port: 6379
+      allowedRoutes:
+        namespaces:
+          from: All
