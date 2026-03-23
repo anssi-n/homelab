@@ -13,3 +13,10 @@ spec:
         kind: HelmRepository
         name: external-secrets
         namespace: external-secrets
+  values:
+    serviceMonitor:
+      enabled: true
+      additionalLabels:
+        release: kube-prometheus-stack
+      grafanaDashboard:
+        enabled: true
