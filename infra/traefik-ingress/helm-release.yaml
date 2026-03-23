@@ -13,7 +13,16 @@ spec:
         kind: HelmRepository
         name: traefik
         namespace: traefik-ingress
-  valuesFrom:
-    - kind: ConfigMap
-      name: traefik-ingress-values
-      valuesKey: traefik-ingress-values.yaml
+  values:
+    deployment:
+      replicas: 2
+    ingressClass:
+      name: traefik
+    metrics:
+      prometheus:
+        service:
+          enabled: true
+        serviceMonitor:
+          enabled: true
+          additionalLabels:
+            release: kube-prometheus-stack
