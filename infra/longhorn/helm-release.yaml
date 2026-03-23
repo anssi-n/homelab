@@ -13,3 +13,7 @@ spec:
         kind: HelmRepository
         name: longhorn
         namespace: longhorn-system
+  values:
+    metrics:
+      serviceMonitor:
+        enabled: true

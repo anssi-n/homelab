@@ -1,0 +1,15 @@
+prometheus:
+  prometheusSpec:
+    replicas: 2
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: local-path
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 1Gi
+    additionalScrapeConfigs:
+      - job_name: "homelab-server"
+        static_configs:
+          - targets: ["192.168.1.151:9100"]

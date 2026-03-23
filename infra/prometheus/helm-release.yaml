@@ -1,0 +1,12 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: prometheus-stack
+  namespace: monitoring
+spec:
+  releaseName: prometheus-stack
+  interval: 10m
+  chartRef:
+    kind: OCIRepository
+    name: prometheus-stack
+    namespace: monitoring

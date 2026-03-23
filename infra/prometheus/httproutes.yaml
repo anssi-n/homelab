@@ -1,0 +1,71 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: monitoring
+  namespace: monitoring
+spec:
+  parentRefs:
+    - name: monitoring-gw
+      sectionName: https
+      kind: Gateway
+
+  hostnames:
+    - monitoring.k8s.anyman.homelab
+
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: kube-prometheus-stack-grafana
+          port: 80
+          weight: 1
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: monitoring-grafana-subdomain
+  namespace: monitoring
+spec:
+  parentRefs:
+    - name: monitoring-gw
+      sectionName: https
+      kind: Gateway
+
+  hostnames:
+    - grafana.monitoring.k8s.anyman.homelab
+
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: kube-prometheus-stack-grafana
+          port: 80
+          weight: 1
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: monitoring-prometheus-subdomain
+  namespace: monitoring
+spec:
+  parentRefs:
+    - name: monitoring-gw
+      sectionName: https
+      kind: Gateway
+
+  hostnames:
+    - prometheus.monitoring.k8s.anyman.homelab
+
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: kube-prometheus-stack-prometheus
+          port: 9090
+          weight: 1
