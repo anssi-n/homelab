@@ -1,0 +1,18 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: push-gateway
+  namespace: monitoring
+spec:
+  releaseName: push-gateway
+  interval: 10m
+  chart:
+    spec:
+      chart: prometheus-pushgateway
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus-community
+        namespace: monitoring
+  values:
+    serviceMonitor:
+      enabled: true
