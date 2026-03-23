@@ -2,3 +2,11 @@ deployment:
   replicas: 2
 ingressClass:
   name: traefik
+metrics:
+  prometheus:
+    service:
+      enabled: true
+    serviceMonitor:
+      enabled: true
+      additionalLabels:
+        release: kube-prometheus-stack
