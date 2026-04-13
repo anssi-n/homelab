@@ -11,3 +11,4 @@ resources:
   - db-tcproute.yaml
   - huutoapp-tls-secret.yaml
   - huutoapp-httproute.yaml
+  - huutoapp-configmap.yaml
