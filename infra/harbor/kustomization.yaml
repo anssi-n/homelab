@@ -11,5 +11,7 @@ resources:
 
 configMapGenerator:
   - name: harbor-values
+    options:
+      disableNameSuffixHash: true
     files:
       - harbor-values.yaml
