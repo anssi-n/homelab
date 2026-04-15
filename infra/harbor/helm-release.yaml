@@ -1,0 +1,19 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: harbor
+  namespace: harbor
+spec:
+  releaseName: harbor
+  interval: 10m
+  chart:
+    spec:
+      chart: harbor
+      sourceRef:
+        kind: HelmRepository
+        name: harbor
+        namespace: harbor
+  valuesFrom:
+    - kind: ConfigMap
+      name: harbor-values
+      valuesKey: harbor-values.yaml

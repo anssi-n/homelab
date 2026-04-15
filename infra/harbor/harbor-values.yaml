@@ -1,0 +1,32 @@
+expose:
+  type: clusterIP
+  tls:
+    certSource: secret
+    secret:
+      secretName: "harbor-tls"
+externalURL: https://harbor.anyman.homelab
+persistence:
+  enabled: true
+  resourcePolicy: "keep"
+  persistentVolumeClaim:
+    registry:
+      storageClass: "longhorn"
+      size: 5Gi
+    jobservice:
+      jobLog:
+        storageClass: "longhorn"
+        size: 100Mi
+    database:
+      storageClass: "longhorn"
+      size: 1Gi
+    redis:
+      storageClass: "longhorn"
+      size: 100Mi
+    trivy:
+      storageClass: "longhorn"
+      size: 2Gi
+ipFamily:
+  ipv6:
+    enabled: false
+caSecretName: "harbor-ca-cert"
+existingSecretSecretKey: "harbor-encryption-key"
