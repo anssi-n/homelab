@@ -27,12 +27,13 @@ spec:
           name: huutoapi
           resources:
             requests:
-              memory: "100Mi"
-              cpu: "50m"
+              memory: "200Mi"
+              cpu: "200m"
             limits:
-              memory: "150Mi"
-              cpu: "150m"
+              memory: "300Mi"
+              cpu: "300m"
           securityContext:
+            readOnlyRootFilesystem: true
             runAsNonRoot: true
             runAsUser: 1000
             allowPrivilegeEscalation: false
