@@ -11,20 +11,20 @@ persistence:
   persistentVolumeClaim:
     registry:
       storageClass: "longhorn"
-      size: 5Gi
+      size: 20Gi
     jobservice:
       jobLog:
         storageClass: "longhorn"
-        size: 100Mi
+        size: 500Mi
     database:
       storageClass: "longhorn"
-      size: 1Gi
+      size: 2Gi
     redis:
       storageClass: "longhorn"
-      size: 100Mi
+      size: 200Mi
     trivy:
       storageClass: "longhorn"
-      size: 2Gi
+      size: 5Gi
 ipFamily:
   ipv6:
     enabled: false
