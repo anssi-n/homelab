@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: huutoapi
+  name: huutoapi
+  namespace: huutoapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: huutoapi
+  template:
+    metadata:
+      labels:
+        app: huutoapi
+    spec:
+      securityContext:
+        fsGroup: 101
+      automountServiceAccountToken: false
+      volumes:
+        - name: images-volume
+          persistentVolumeClaim:
+            claimName: huutoapi-images
+      containers:
+        - image: harbor.anyman.homelab/huutoapp/huutoapi:0.1.0
+          name: huutoapi
+          resources:
+            requests:
+              memory: "100Mi"
+              cpu: "50m"
+            limits:
+              memory: "150Mi"
+              cpu: "150m"
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            allowPrivilegeEscalation: false
+          envFrom:
+            - secretRef:
+                name: huutoapp-secrets
+            - configMapRef:
+                name: huutoapp-config
+          volumeMounts:
+            - mountPath: /app/media/images
+              name: images-volume
