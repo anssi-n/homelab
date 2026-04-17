@@ -12,7 +12,6 @@ resources:
   - huutoapp-tls-secret.yaml
   - huutoapp-httproute.yaml
   - huutoapp-configmap.yaml
-
-#  - huutoapi-service.yaml
-#  - huutoapi-deployment.yaml
-#  - huutoworker-deployment.yaml
+  - huutoapi-service.yaml
+  - huutoapi-deployment.yaml
+  - huutoworker-deployment.yaml
