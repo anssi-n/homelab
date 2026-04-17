@@ -33,7 +33,6 @@ spec:
               memory: "300Mi"
               cpu: "300m"
           securityContext:
-            readOnlyRootFilesystem: true
             runAsNonRoot: true
             runAsUser: 1000
             allowPrivilegeEscalation: false
