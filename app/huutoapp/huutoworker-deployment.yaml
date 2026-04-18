@@ -6,7 +6,6 @@ metadata:
   name: huutoworker
   namespace: huutoapp
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: huutoworker
