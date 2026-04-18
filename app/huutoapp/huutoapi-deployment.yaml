@@ -47,3 +47,21 @@ spec:
           volumeMounts:
             - mountPath: /app/media/images
               name: images-volume
+
+          ports:
+            - name: liveness-port
+              containerPort: 8000
+
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: liveness-port
+            failureThreshold: 1
+            periodSeconds: 10
+
+          startupProbe:
+            httpGet:
+              path: /health
+              port: liveness-port
+            failureThreshold: 30
+            periodSeconds: 10
