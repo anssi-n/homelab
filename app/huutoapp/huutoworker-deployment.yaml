@@ -22,7 +22,7 @@ spec:
           persistentVolumeClaim:
             claimName: huutoapi-images
       containers:
-        - image: harbor.anyman.homelab/huutoapp/huutoworker:0.1.0
+        - image: harbor.anyman.homelab/huutoapp/huutoworker:0.1.1
           name: huutoworker
           resources:
             requests:
