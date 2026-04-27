@@ -24,6 +24,7 @@ spec:
       containers:
         - image: harbor.anyman.homelab/huutoapp/huutoworker:0.1.1
           name: huutoworker
+          imagePullPolicy: Always
           resources:
             requests:
               memory: "150Mi"
