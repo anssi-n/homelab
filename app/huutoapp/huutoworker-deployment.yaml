@@ -59,6 +59,7 @@ metadata:
 spec:
   ports:
     - port: 8080
+      name: metrics
       protocol: TCP
       targetPort: 8080
   selector:

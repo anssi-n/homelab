@@ -18,6 +18,19 @@ data:
   LOGGING_CONFIG_PORT: "5050"
   HUUTO_USERNAME: _anssi
   POSTAL_CODE: "33720"
-  DELIVERY_TERMS: "\nTavallisten DVD ja Blu-Ray -julkaisujen postikuluja voidaan yhdistää seuraavasti:\n1-2 kpl 3,80€\n3-4 kpl 5,90€\n5+ kpl 6,90€\nEi koske erikoisjulkaisuja kuten esim. digibookit, steelbookit ja isommat TV-sarjaboksit."
+  DELIVERY_TERMS: "
+
+    Tavallisten DVD ja Blu-Ray -julkaisujen postikuluja voidaan yhdistää
+    seuraavasti:
+
+    1-2 kpl 3,80€
+
+    3-4 kpl 5,90€
+
+    5+ kpl 6,90€
+
+    Ei koske erikoisjulkaisuja kuten esim. digibookit, steelbookit ja isommat
+    TV-sarjaboksit."
   PAYMENT_TERMS: "Tilisiirto, MobilePay tai käteinen"
   MAX_RETRIES: "2"
+  WORKER_PROMETHEUS_PORT: "8080"
