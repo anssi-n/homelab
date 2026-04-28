@@ -64,3 +64,22 @@ spec:
       targetPort: 8080
   selector:
     app: huutoworker
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    release: kube-prometheus-stack
+  name: huutoworker-servicemonitor
+  namespace: huutoapp
+spec:
+  endpoints:
+  - interval: 5s
+    path: /metrics/
+    port: metrics
+  namespaceSelector:
+    matchNames:
+    - huutoapp
+  selector:
+    matchLabels:
+      app: huutoworker

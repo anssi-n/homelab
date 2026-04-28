@@ -8,7 +8,27 @@ metadata:
 spec:
   ports:
     - port: 8000
+      name: huutoapi
       protocol: TCP
       targetPort: 8000
   selector:
     app: huutoapi
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    release: kube-prometheus-stack
+  name: huutoapi-servicemonitor
+  namespace: huutoapp
+spec:
+  endpoints:
+  - interval: 10s
+    path: /metrics/
+    port: huutoapi
+  namespaceSelector:
+    matchNames:
+    - huutoapp
+  selector:
+    matchLabels:
+      app: huutoapi
