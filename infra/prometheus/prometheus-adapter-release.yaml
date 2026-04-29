@@ -1,0 +1,24 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: prometheus-adapter
+  namespace: monitoring
+spec:
+  releaseName: prometheus-adapter
+  interval: 10m
+  chart:
+    spec:
+      chart: prometheus-adapter
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus-community
+        namespace: monitoring
+  values:
+    prometheus:
+      url: http://kube-prometheus-stack-prometheus.monitoring.svc
+      port: 9090
+      path: ""
+    rules:
+      existing: prometheus-adapter-rules
+    certManager:
+      enabled: true
