@@ -8,7 +8,7 @@ spec:
   interval: 10m
   chart:
     spec:
-      chart: kedacore
+      chart: keda
       sourceRef:
         kind: HelmRepository
         name: kedacore
