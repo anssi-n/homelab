@@ -14,6 +14,8 @@ resources:
   - kyverno/
   - longhorn/
   - harbor/
+  - keda/
+
 #  - prometheus/
 # - opa-gatekeeper/
 # - sandboxes/
