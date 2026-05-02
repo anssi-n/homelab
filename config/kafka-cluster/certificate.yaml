@@ -17,6 +17,7 @@ spec:
     - client auth
   dnsNames:
     - "*.kafka.k8s.anyman.homelab"
+    - "*.cluster.local"
   issuerRef:
     name: self-signed-issuer
     kind: ClusterIssuer
