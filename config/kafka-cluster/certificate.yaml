@@ -1,0 +1,22 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: kafka-certificate
+  namespace: kafka-cluster
+spec:
+  secretName: kafka-certificate
+  subject:
+    organizations:
+      - homelab
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS8
+    size: 2048
+  usages:
+    - server auth
+    - client auth
+  dnsNames:
+    - "*.kafka.k8s.anyman.homelab"
+  issuerRef:
+    name: self-signed-issuer
+    kind: ClusterIssuer

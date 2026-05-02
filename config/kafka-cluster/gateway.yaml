@@ -1,0 +1,13 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: kafka-gateway
+  namespace: kafka-cluster
+spec:
+  gatewayClassName: envoy
+  listeners:
+    - name: kafka-listener
+      protocol: TLS
+      port: 9092
+      tls:
+        mode: Passthrough
