@@ -17,6 +17,10 @@ spec:
     config:
       auto.create.topics.enable: true
     listeners:
+      - name: plain
+        port: 9094
+        type: internal
+        tls: false
       - authentication:
           type: scram-sha-512
         configuration:
