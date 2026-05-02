@@ -5,10 +5,14 @@ metadata:
   namespace: strimzi
 spec:
   releaseName: strimzi-kafka-operator
-  interval: 10m
-  chartRef:
-    kind: OCIRepository
-    name: strimzi
-    namespace: strimzi
+  interval: 15m
+  chart:
+    spec:
+      chart: strimzi-kafka-operator
+      sourceRef:
+        kind: HelmRepository
+        name: strimzi
+        namespace: strimzi
+
   values:
     watchAnyNamespace: true

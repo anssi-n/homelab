@@ -1,8 +1,8 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: falcosecurity
-  namespace: falco
+  name: strimzi
+  namespace: strimzi
 spec:
   interval: 10m0s
-  url: https://falcosecurity.github.io/charts
+  url: https://strimzi.io/charts
