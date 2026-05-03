@@ -8,4 +8,4 @@ resources:
   - nodepools.yaml
   - gateway.yaml
   - tls-routes.yaml
-  # - user.yaml
+  - user.yaml
