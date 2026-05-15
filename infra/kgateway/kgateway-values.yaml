@@ -1,2 +1,4 @@
 controller:
   replicaCount: 2
+  extraEnv:
+    KGW_SKIP_GATEWAY_API_VERSION_CHECK: "true"
