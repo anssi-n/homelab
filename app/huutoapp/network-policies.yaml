@@ -1,0 +1,231 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: default-deny-all-except-dns
+  namespace: huutoapp
+spec:
+  description: "Default deny ingress + egress (except CoreDNS)"
+  endpointSelector: {}
+  ingress:
+    - {}
+  egress:
+    - toEndpoints:
+        - matchLabels:
+            io.kubernetes.pod.namespace: kube-system
+            k8s-app: kube-dns
+      toPorts:
+        - ports:
+            - port: "53"
+              protocol: UDP
+            - port: "53"
+              protocol: TCP
+          rules:
+            dns:
+              - matchPattern: "*"
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: allow-huutoapi-traffic
+  namespace: huutoapp
+spec:
+  description: "Allow ingress and egress traffic to and from huutoapi pods"
+  endpointSelector:
+    matchLabels:
+      app: huutoapi
+  ingress:
+    # Traffic from gateway api
+    - fromEndpoints:
+        - matchLabels:
+            io.kubernetes.pod.namespace: envoy-gateway
+      toPorts:
+        - ports:
+            - port: "8000"
+              protocol: TCP
+
+    # Traffic from prometheus to metrics endpoint
+    - fromEndpoints:
+        - matchLabels:
+            io.kubernetes.pod.namespace: monitoring
+      toPorts:
+        - ports:
+            - port: "8000"
+              protocol: TCP
+
+  egress:
+    # Traffic to redis
+    - toEndpoints:
+        - matchLabels:
+            app: redis
+      toPorts:
+        - ports:
+            - port: "6379"
+              protocol: TCP
+
+    # Traffic to DBs
+    - toEndpoints:
+        - matchLabels:
+            app.kubernetes.io/instance: huutoapp-db
+      toPorts:
+        - ports:
+            - port: "5432"
+              protocol: TCP
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: allow-huutoworker-traffic
+  namespace: huutoapp
+spec:
+  description: "Allow ingress and egress traffic to and from huutoworker pods"
+  endpointSelector:
+    matchLabels:
+      app: huutoworker
+
+  ingress:
+    # Traffic from prometheus to metrics endpoint
+    - fromEndpoints:
+        - matchLabels:
+            io.kubernetes.pod.namespace: monitoring
+      toPorts:
+        - ports:
+            - port: "8080"
+              protocol: TCP
+
+  egress:
+    # Traffic to redis
+    - toEndpoints:
+        - matchLabels:
+            app: redis
+      toPorts:
+        - ports:
+            - port: "6379"
+              protocol: TCP
+
+    # Traffic to DBs
+    - toEndpoints:
+        - matchLabels:
+            app.kubernetes.io/instance: huutoapp-db
+      toPorts:
+        - ports:
+            - port: "5432"
+              protocol: TCP
+
+    # External traffic to huuto.net api
+    - toFQDNs:
+        - matchName: "api.huuto.net"
+      toPorts:
+        - ports:
+            - port: "443"
+              protocol: TCP
+
+    # External traffic to OMDB
+    - toFQDNs:
+        - matchName: "www.omdbapi.com"
+      toPorts:
+        - ports:
+            - port: "443"
+              protocol: TCP
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: allow-db-traffic
+  namespace: huutoapp
+spec:
+  description: "Allow ingress and egress traffic to and from db replicas"
+
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/instance: huutoapp-db
+
+  egress:
+    # Traffic to other db replicas
+    - toEndpoints:
+        - matchLabels:
+            app.kubernetes.io/instance: huutoapp-db
+      toPorts:
+        - ports:
+            - port: "8000"
+              protocol: TCP
+            - port: "5432"
+              protocol: TCP
+
+  ingress:
+    # Traffic from gateway api
+    - fromEndpoints:
+        - matchLabels:
+            io.kubernetes.pod.namespace: envoy-gateway
+      toPorts:
+        - ports:
+            - port: "5432"
+              protocol: TCP
+
+    # Traffic from other db replicas
+    - fromEndpoints:
+        - matchLabels:
+            app.kubernetes.io/instance: huutoapp-db
+      toPorts:
+        - ports:
+            - port: "8000"
+              protocol: TCP
+            - port: "5432"
+              protocol: TCP
+
+    # Traffic from huutoapi
+    - fromEndpoints:
+        - matchLabels:
+            app: huutoapi
+      toPorts:
+        - ports:
+            - port: "5432"
+              protocol: TCP
+
+    # Traffic from huutoworker
+    - fromEndpoints:
+        - matchLabels:
+            app: huutoworker
+      toPorts:
+        - ports:
+            - port: "5432"
+              protocol: TCP
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: allow-redis-traffic
+  namespace: huutoapp
+spec:
+  description: "Allow ingress and egress traffic to and from redis"
+
+  endpointSelector:
+    matchLabels:
+      app: redis
+
+  ingress:
+    # Traffic from gateway api
+    - fromEndpoints:
+        - matchLabels:
+            io.kubernetes.pod.namespace: envoy-gateway
+      toPorts:
+        - ports:
+            - port: "6379"
+              protocol: TCP
+
+    # Traffic from huutoapi
+    - fromEndpoints:
+        - matchLabels:
+            app: huutoapi
+      toPorts:
+        - ports:
+            - port: "6379"
+              protocol: TCP
+
+    # Traffic from huutoworker
+    - fromEndpoints:
+        - matchLabels:
+            app: huutoworker
+      toPorts:
+        - ports:
+            - port: "6379"
+              protocol: TCP
