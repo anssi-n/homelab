@@ -15,4 +15,4 @@ resources:
   - huutoapi-service.yaml
   - huutoapi-deployment.yaml
   - huutoworker-deployment.yaml
-  - network-policies.yaml
+  #- network-policies.yaml
