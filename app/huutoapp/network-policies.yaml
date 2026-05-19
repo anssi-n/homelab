@@ -161,6 +161,17 @@ spec:
             - port: "5432"
               protocol: TCP
 
+    # Traffic from cloudnativepg
+    - fromEndpoints:
+      - matchLabels:
+          name: cloudnative-pg
+      toPorts:
+      - ports:
+        - port: "8000"
+          protocol: TCP
+        - port: "5432"
+          protocol: TCP
+
     # Traffic from other db replicas
     - fromEndpoints:
         - matchLabels:
