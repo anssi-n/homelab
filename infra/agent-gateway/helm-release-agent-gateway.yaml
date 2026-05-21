@@ -10,3 +10,6 @@ spec:
     kind: OCIRepository
     name: agentgateway
     namespace: agentgateway-system
+  values:
+    inferenceExtension:
+      enabled: true
