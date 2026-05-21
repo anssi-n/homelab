@@ -7,9 +7,9 @@ spec:
   releaseName: kyverno
   interval: 10m
   install:
-    timeout: 20m # Longer for first-time installs (PV provisioning, migrations, etc.)
+    timeout: 40m # Longer for first-time installs (PV provisioning, migrations, etc.)
   upgrade:
-    timeout: 20m # For subsequent upgrades
+    timeout: 40m # For subsequent upgrades
   chart:
     spec:
       chart: kyverno

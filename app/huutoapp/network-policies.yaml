@@ -151,6 +151,10 @@ spec:
             - port: "5432"
               protocol: TCP
 
+    # Traffic to kube-apiserver
+    - toEntities:
+        - kube-apiserver
+
   ingress:
     # Traffic from gateway api
     - fromEndpoints:
@@ -163,14 +167,8 @@ spec:
 
     # Traffic from cloudnativepg
     - fromEndpoints:
-      - matchLabels:
-          name: cloudnative-pg
-      toPorts:
-      - ports:
-        - port: "8000"
-          protocol: TCP
-        - port: "5432"
-          protocol: TCP
+        - matchLabels:
+            io.kubernetes.pod.namespace: cnpg-system
 
     # Traffic from other db replicas
     - fromEndpoints:

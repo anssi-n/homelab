@@ -6,7 +6,7 @@ resources:
   - metrics-server/
   - traefik-ingress/
   - envoy-gateway/
-  #  - kgateway/
+  - kgateway/
   - rancher/
   - istio/
   - cert-manager/

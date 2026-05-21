@@ -7,6 +7,10 @@ spec:
   # helm install istiod istio/istiod -n istio-system --wait
   releaseName: istiod
   interval: 15m
+  install:
+    timeout: 40m # Longer for first-time installs (PV provisioning, migrations, etc.)
+  upgrade:
+    timeout: 40m # For subsequent upgrades
   chart:
     spec:
       chart: istiod
