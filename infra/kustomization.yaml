@@ -16,6 +16,7 @@ resources:
   - harbor/
   - keda/
   - agent-gateway/
+  - llmkube/
 #  - prometheus/
 # - opa-gatekeeper/
 # - sandboxes/
