@@ -7,4 +7,4 @@ spec:
   interval: 10m
   url: oci://cr.agentgateway.dev/charts/agentgateway-crds
   ref:
-    semver: ">=1.2.0"
+    semver: "=1.2.0"
