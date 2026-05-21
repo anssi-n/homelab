@@ -1,0 +1,9 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: agentgateway-system
+resources:
+  - namespace.yaml
+  - oci-repository-crds.yaml
+  - oci-repository-agent-gateway.yaml
+  - helm-release-crds.yaml
+  - helm-release-agent-gateway.yaml
