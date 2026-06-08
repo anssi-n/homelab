@@ -6,6 +6,10 @@ metadata:
 spec:
   releaseName: llmkube
   interval: 10m
+  install:
+    timeout: 30m # Longer for first-time installs (PV provisioning, migrations, etc.)
+  upgrade:
+    timeout: 30m # For subsequent upgrades
   chart:
     spec:
       chart: llmkube
