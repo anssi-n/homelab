@@ -1,0 +1,24 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: agent-sandbox
+  namespace: flux-system
+spec:
+  interval: 10m
+  chart:
+    spec:
+      chart: ./helm
+      version: "" # not needed for local chart
+      sourceRef:
+        kind: GitRepository
+        name: agent-sandbox
+        namespace: flux-system
+  install:
+    crds: CreateReplace
+    createNamespace: true
+  upgrade:
+    crds: CreateReplace
+  values:
+    image:
+      tag: "v0.4.6"
+      controller.extensions: true

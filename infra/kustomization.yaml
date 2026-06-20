@@ -17,6 +17,7 @@ resources:
   - keda/
   - agent-gateway/
   - llmkube/
+  - agent-sandbox/
 #  - prometheus/
 # - opa-gatekeeper/
 # - sandboxes/

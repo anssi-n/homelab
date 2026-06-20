@@ -1,0 +1,14 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: agent-sandbox
+  namespace: flux-system
+spec:
+  interval: 10m
+  url: https://github.com/kubernetes-sigs/agent-sandbox.git
+  ref:
+    semver: "v0.4.6"
+  ignore:
+    | #  /* Ignore everything at the root of the repository. !/helm → Do not ignore (i.e., explicitly include) the /helm directory and everything inside it.
+    /*        
+    !/helm
