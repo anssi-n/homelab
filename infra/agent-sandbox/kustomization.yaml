@@ -4,4 +4,3 @@ namespace: flux-system
 resources:
   - git-repository.yaml
   - helm-release.yaml
-  - agent-sandbox-extensions.yaml
