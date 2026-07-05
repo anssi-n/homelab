@@ -1,0 +1,22 @@
+kind: Kibana
+metadata:
+  name: homelab
+  namespace: efk
+spec:
+  version: 9.4.2
+  count: 1
+  elasticsearchRef:
+    name: homelab
+  config:
+    server.publicBaseUrl: "https://kibana.k8s.anyman.homelab"
+  podTemplate:
+    spec:
+      containers:
+        - name: kibana
+          resources:
+            requests:
+              memory: 512Mi
+              cpu: 200m
+            limits:
+              memory: 1Gi
+              cpu: 1000m
