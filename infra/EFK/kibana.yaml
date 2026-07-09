@@ -1,14 +1,20 @@
+apiVersion: kibana.k8s.elastic.co/v1
 kind: Kibana
 metadata:
-  name: homelab
+  name: kibana
   namespace: efk
 spec:
-  version: 9.4.2
+  version: 9.4.3
   count: 1
   elasticsearchRef:
-    name: homelab
-  config:
-    server.publicBaseUrl: "https://kibana.k8s.anyman.homelab"
+    name: elastic-search
+
+  http:
+    tls:
+      selfSignedCertificate:
+        subjectAltNames:
+          - dns: kibana.k8s.anyman.homelab
+
   podTemplate:
     spec:
       containers:
@@ -19,4 +25,4 @@ spec:
               cpu: 200m
             limits:
               memory: 1Gi
-              cpu: 1000m
+              cpu: 500m

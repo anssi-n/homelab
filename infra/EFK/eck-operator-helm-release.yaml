@@ -13,3 +13,18 @@ spec:
         kind: HelmRepository
         name: elastic
         namespace: efk
+  values:
+    replicaCount: 1
+
+    resources:
+      limits:
+        cpu: 500m
+        memory: 512Mi
+      requests:
+        cpu: 100m
+        memory: 150Mi
+
+    config:
+      logVerbosity: "0"
+      metrics:
+        port: 9090

@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: es-init-policies
+  namespace: efk
+data:
+  setup.sh: |
+    #!/bin/sh
+    # Wait until Elasticsearch is responsive
+    until curl -k -s -u "elastic:$ES_PWD" https://elastic-search-es-http.efk.svc:9200 > /dev/null; do
+      echo "Waiting for Elasticsearch..."
+      sleep 5
+    done
+
+    echo "Creating ILM policy..."
+    curl -k -u "elastic:$ES_PWD" -X PUT "https://elastic-search-es-http.efk.svc:9200/_ilm/policy/k8s-log-retention-policy" \
+      -H 'Content-Type: application/json' -d '{"policy":{"phases":{"hot":{"min_age":"0ms","actions":{}},"delete":{"min_age":"7d","actions":{"delete":{}}}}}}'
+
+    echo "Creating Index Templates..."
+    curl -k -u "elastic:$ES_PWD" -X PUT "https://elastic-search-es-http.efk.svc:9200/_index_template/k8s-pod-logs-template" \
+      -H 'Content-Type: application/json' -d '{"index_patterns":["k8s-pod-logs-*"],"template":{"settings":{"index.lifecycle.name":"k8s-log-retention-policy"}}}'
+
+    curl -k -u "elastic:$ES_PWD" -X PUT "https://elastic-search-es-http.efk.svc:9200/_index_template/k8s-system-logs-template" \
+      -H 'Content-Type: application/json' -d '{"index_patterns":["k8s-system-logs-*"],"template":{"settings":{"index.lifecycle.name":"k8s-log-retention-policy"}}}'
+
+    echo "Initialization complete!"

@@ -1,0 +1,16 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: BackendTLSPolicy
+metadata:
+  name: kibana-tls-policy
+  namespace: efk
+spec:
+  targetRefs:
+    - group: ""
+      kind: Service
+      name: kibana-kb-http
+  validation:
+    hostname: kibana.k8s.anyman.homelab
+    caCertificateRefs:
+      - group: ""
+        kind: ConfigMap
+        name: kibana-kb-http-ca-public

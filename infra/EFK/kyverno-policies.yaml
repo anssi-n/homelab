@@ -1,0 +1,53 @@
+apiVersion: kyverno.io/v1
+kind: Policy
+metadata:
+  name: sync-kibana-secret-to-configmap
+  namespace: efk
+spec:
+  background: true
+  generateExisting: true
+  rules:
+    - name: mutate-secret-to-configmap
+      match:
+        any:
+          - resources:
+              kinds:
+                - Secret
+              names:
+                - kibana-kb-http-certs-public
+      generate:
+        synchronize: true
+        apiVersion: v1
+        kind: ConfigMap
+        name: kibana-kb-http-ca-public
+        namespace: efk
+        data:
+          data:
+            ca.crt: '{{ base64_decode(request.object.data."ca.crt") }}'
+---
+apiVersion: kyverno.io/v1
+kind: Policy
+metadata:
+  name: create-secret-for-elastic-username
+  namespace: efk
+spec:
+  background: true
+  generateExisting: true
+  rules:
+    - name: create-secret-for-elastic-username
+      match:
+        any:
+          - resources:
+              kinds:
+                - Secret
+              names:
+                - elastic-search-es-elastic-user
+      generate:
+        synchronize: true
+        apiVersion: v1
+        kind: Secret
+        name: elastic-username
+        namespace: efk
+        data:
+          data:
+            username: ZWxhc3RpYw== # elastic

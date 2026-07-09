@@ -1,0 +1,97 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: elastic-search-prod
+  namespace: efk
+spec:
+  version: 9.4.3
+  http:
+    tls:
+      selfSignedCertificate:
+        disabled: false
+        subjectAltNames:
+          - dns: elasticsearch.anyman.homelab
+  nodeSets:
+    # Master nodes - responsible for cluster management
+    - name: master
+      count: 3
+      config:
+        node.roles: ["master"]
+        xpack.ml.enabled: false
+      podTemplate:
+        spec:
+          initContainers:
+            - name: sysctl
+              securityContext:
+                privileged: true
+                runAsUser: 0
+              command: ["sh", "-c", "sysctl -w vm.max_map_count=262144"]
+          containers:
+            - name: elasticsearch
+              resources:
+                requests:
+                  memory: 1Gi
+                  cpu: 200m
+                limits:
+                  memory: 1Gi
+                  cpu: 500m
+      volumeClaimTemplates:
+        - metadata:
+            name: elasticsearch-data
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 5Gi
+            storageClassName: longhorn-no-replicas
+
+    # Data nodes - store data and execute queries
+    - name: data
+      count: 3
+      config:
+        node.roles: ["data", "ingest"]
+      podTemplate:
+        spec:
+          initContainers:
+            - name: sysctl
+              securityContext:
+                privileged: true
+                runAsUser: 0
+              command: ["sh", "-c", "sysctl -w vm.max_map_count=262144"]
+          containers:
+            - name: elasticsearch
+              resources:
+                requests:
+                  memory: 1Gi
+                  cpu: 400m
+                limits:
+                  memory: 1Gi
+                  cpu: 700m
+      volumeClaimTemplates:
+        - metadata:
+            name: elasticsearch-data
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 15Gi
+            storageClassName: longhorn-no-replicas
+
+    # Coordinating nodes - route requests and reduce results
+    - name: coordinating
+      count: 2
+      config:
+        node.roles: []
+      podTemplate:
+        spec:
+          containers:
+            - name: elasticsearch
+              resources:
+                requests:
+                  memory: 1Gi
+                  cpu: 400m
+                limits:
+                  memory: 1Gi
+                  cpu: 700m

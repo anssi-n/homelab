@@ -7,5 +7,14 @@ resources:
   - fluent-helm-repository.yaml
   - eck-operator-helm-release.yaml
   - fluent-operator-helm-release.yaml
-  # - elastic-search.yaml
-  # - kibana.yaml
+  - elastic-search-dev.yaml
+  - kibana.yaml
+  - kibana-tls-secret.yaml
+  - kibana-gateway.yaml
+  - kibana-httproute.yaml
+  - kibana-backendtlspolicy.yaml
+  - kyverno-rbac.yaml
+  - kyverno-policies.yaml
+  - fluentbit-clusteroutputs.yaml
+# - elastic-search-ilm-configmap.yaml
+#  - elastic-search-ilm-job.yaml

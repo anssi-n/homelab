@@ -1,0 +1,55 @@
+apiVersion: fluentbit.fluent.io/v1alpha2
+kind: ClusterOutput
+metadata:
+  name: elasticsearch-pod-output
+  labels:
+    fluentbit.fluent.io/enabled: "true"
+spec:
+  match: "kube.*"
+  es:
+    host: "elastic-search-es-http.efk.svc"
+    port: 9200
+    httpUser:
+      valueFrom:
+        secretKeyRef:
+          name: elastic-username
+          key: username
+    httpPassword:
+      valueFrom:
+        secretKeyRef:
+          name: elastic-search-es-elastic-user
+          key: elastic
+    tls:
+      verify: false
+    logstashFormat: true
+    logstashPrefix: "k8s-pod-logs"
+    suppressTypeName: "true"
+    bufferSize: "1M"
+---
+apiVersion: fluentbit.fluent.io/v1alpha2
+kind: ClusterOutput
+metadata:
+  name: elasticsearch-system-output
+  labels:
+    fluentbit.fluent.io/enabled: "true"
+spec:
+  match: "service.*"
+  es:
+    host: "elastic-search-es-http.efk.svc"
+    port: 9200
+    httpUser:
+      valueFrom:
+        secretKeyRef:
+          name: elastic-username
+          key: username
+    httpPassword:
+      valueFrom:
+        secretKeyRef:
+          name: elastic-search-es-elastic-user
+          key: elastic
+    tls:
+      verify: false
+    logstashFormat: true
+    logstashPrefix: "k8s-system-logs"
+    suppressTypeName: "true"
+    bufferSize: "1M"

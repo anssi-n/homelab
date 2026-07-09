@@ -1,17 +1,17 @@
-apiVersion: elasticsearch.k8s.elastic.co/v1
 kind: Elasticsearch
 metadata:
-  name: homelab
+  name: elastic-search
   namespace: efk
 spec:
-  version: 9.4.2
+  version: 9.4.3
   nodeSets:
     - name: default
-      count: 1
+      count: 1 # Optimized to 1 node for testing (production usually uses 3)
       config:
         node.roles: ["master", "data", "ingest"]
         node.store.allow_mmap: false
         xpack.ml.enabled: false
+        xpack.security.enabled: true
         xpack.watcher.enabled: false
       podTemplate:
         spec:
@@ -22,7 +22,7 @@ spec:
                   memory: 1Gi
                   cpu: 200m
                 limits:
-                  memory: 1.5Gi
+                  memory: 2Gi
                   cpu: 1000m
               env:
                 - name: ES_JAVA_OPTS
@@ -31,9 +31,9 @@ spec:
         - metadata:
             name: elasticsearch-data
           spec:
-            storageClassName: longhorn-no-replicas
             accessModes:
               - ReadWriteOnce
             resources:
               requests:
-                storage: 5Gi
+                storage: 10Gi
+            storageClassName: longhorn-no-replicas

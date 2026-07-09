@@ -13,3 +13,28 @@ spec:
         kind: HelmRepository
         name: fluent
         namespace: efk
+  values:
+    Kubernetes: true
+
+    operator:
+      enable: true
+      resources:
+        limits:
+          cpu: 500m # Increased to prevent CPU throttling during API discovery
+          memory: 512Mi # Increased from 60Mi to give the controller cache breathing room
+        requests:
+          cpu: 100m
+          memory: 128Mi # Increased from 20Mi to ensure stable pod scheduling
+
+    fluentbit:
+      enable: true
+      resources:
+        limits:
+          cpu: 1000m # Increased to handle high log volumes and regex parsing
+          memory: 1024Mi # Increased from 200Mi to prevent crashes during backend traffic spikes
+        requests:
+          cpu: 100m # Increased from 10m to prevent slow startup times
+          memory: 256Mi # Increased from 25Mi to cover baseline chunk processing
+
+    fluentd:
+      enable: false

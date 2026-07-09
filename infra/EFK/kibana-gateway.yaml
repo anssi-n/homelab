@@ -1,0 +1,21 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: kibana-gw
+  namespace: efk
+spec:
+  gatewayClassName: envoy
+
+  listeners:
+    - name: https
+      protocol: HTTPS
+      port: 443
+      hostname: kibana.k8s.anyman.homelab
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: kibana-tls
+            kind: Secret
+      allowedRoutes:
+        namespaces:
+          from: All
