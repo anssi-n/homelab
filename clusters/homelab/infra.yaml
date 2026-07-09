@@ -4,7 +4,8 @@ metadata:
   name: infra
   namespace: flux-system
 spec:
-  interval: 60s
+  interval: 10m
+  timeout: 5m
   path: ./infra/
   prune: true
   wait: true

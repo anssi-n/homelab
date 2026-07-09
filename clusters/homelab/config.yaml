@@ -4,7 +4,8 @@ metadata:
   name: config
   namespace: flux-system
 spec:
-  interval: 60s
+  interval: 10m
+  timeout: 5m
   path: ./config/
   dependsOn:
     - name: infra
