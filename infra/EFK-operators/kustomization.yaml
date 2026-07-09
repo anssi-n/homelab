@@ -7,3 +7,4 @@ resources:
   - fluent-helm-repository.yaml
   - eck-operator-helm-release.yaml
   - fluent-operator-helm-release.yaml
+  - kyverno-rbac.yaml

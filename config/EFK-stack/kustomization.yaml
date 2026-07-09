@@ -8,7 +8,6 @@ resources:
   - kibana-gateway.yaml
   - kibana-httproute.yaml
   - kibana-backendtlspolicy.yaml
-  - kyverno-rbac.yaml
   - kyverno-policies.yaml
   - fluentbit-clusteroutputs.yaml
 # - elastic-search-ilm-configmap.yaml
