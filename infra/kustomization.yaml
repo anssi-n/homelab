@@ -5,7 +5,7 @@ resources:
   - metallb/
   - metrics-server/
   - traefik-ingress/
-  - envoy-gateway/
+  #  - envoy-gateway/
   - kgateway/
   - rancher/
   - istio/
