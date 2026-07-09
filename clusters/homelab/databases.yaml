@@ -6,6 +6,9 @@ metadata:
 spec:
   interval: 60s
   path: ./databases/
+  dependsOn:
+    - name: infra
+    - name: config
   prune: true
   wait: true
   sourceRef:

@@ -6,6 +6,8 @@ metadata:
 spec:
   interval: 60s
   path: ./config/
+  dependsOn:
+    - name: infra
   prune: true
   wait: true
   sourceRef:

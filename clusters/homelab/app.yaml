@@ -8,6 +8,10 @@ spec:
   path: ./app/
   prune: true
   wait: true
+  dependsOn:
+    - name: infra
+    - name: config
+    - name: databases
   sourceRef:
     kind: GitRepository
     name: flux-system
