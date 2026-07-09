@@ -6,10 +6,10 @@ metadata:
 spec:
   releaseName: envoy-gateway
   interval: 10m
-  install:
-    crds: Skip # <--- Tell Flux NOT to try creating/modifying CRDs
-  upgrade:
-    crds: Skip # <--- Skip CRD management during upgrades too
+  # install:
+  #   crds: Skip # <--- Tell Flux NOT to try creating/modifying CRDs
+  # upgrade:
+  #   crds: Skip # <--- Skip CRD management during upgrades too
   chartRef:
     kind: OCIRepository
     name: envoy-gateway
