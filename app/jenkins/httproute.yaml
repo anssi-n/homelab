@@ -1,0 +1,29 @@
+kind: HTTPRoute
+metadata:
+  name: jenkins-route
+  namespace: jenkins
+spec:
+  parentRefs:
+    - name: jenkins-gateway
+      sectionName: https
+      kind: Gateway
+
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: jenkins
+          port: 8080
+          weight: 1
+#      filters:
+#      - type: RequestHeaderModifier
+#        requestHeaderModifier:
+#          set:
+#          - name: X-Forwarded-Proto
+#            value: https
+#          - name: X-Forwarded-Port
+#            value: "443"
+#          - name: X-Forwarded-Host
+#            value: jenkins.anyman.homelab

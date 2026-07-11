@@ -1,0 +1,41 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: jenkins-agent
+  namespace: jenkins-agents
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "pods/log", "pods/exec", "services", "events"]
+    verbs: ["create", "get", "list", "watch", "update", "delete", "patch"]
+  - apiGroups: [""]
+    resources: ["pods/exec"]
+    verbs: ["create"]
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["get", "list", "watch"]
+
+---
+# RoleBinding to link the ServiceAccount to the Role
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: jenkins-agent
+  namespace: jenkins-agents
+subjects:
+  - kind: ServiceAccount
+    name: jenkins-agent
+    namespace: jenkins-agents
+roleRef:
+  kind: Role
+  name: jenkins-agent
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: jenkins-agent-sa-secret
+  namespace: jenkins-agents
+  annotations:
+    kubernetes.io/service-account.name: "jenkins-agent"
+type: kubernetes.io/service-account-token

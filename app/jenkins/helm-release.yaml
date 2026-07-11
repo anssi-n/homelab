@@ -1,0 +1,54 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: jenkins
+  namespace: jenkins
+spec:
+  releaseName: jenkins
+  interval: 10m
+  chart:
+    spec:
+      chart: jenkins
+      sourceRef:
+        kind: HelmRepository
+        name: jenkins
+        namespace: jenkins
+  values:
+    controller:
+      jenkinsUrl: "https://jenkins.anyman.homelab"
+      resources:
+        requests:
+          cpu: "500m"
+          memory: "1Gi"
+        limits:
+          cpu: "1000m"
+          memory: "2Gi"
+      javaOpts: >
+        -Xms512m
+        -Xmx1536m
+        -Djava.awt.headless=true
+    persistence:
+      enabled: true
+      storageClass: "longhorn-no-replicas"
+      size: 10Gi
+      accessMode: ReadWriteOnce
+    serviceAccount:
+      create: true
+      name: jenkins
+    serviceAccountAgent:
+      create: true
+      name: jenkins-agent
+    rbac:
+      create: true
+    agent:
+      enabled: true
+      namespace: "jenkins-agents"
+      resources:
+        requests:
+          cpu: "200m"
+          memory: "512Mi"
+        limits:
+          cpu: "500m"
+          memory: "1Gi"
+      containerCap: 20
+      instanceCap: 10
