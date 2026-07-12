@@ -27,8 +27,17 @@ spec:
         -Xms512m
         -Xmx1536m
         -Djava.awt.headless=true
+      admin:
+        username: "admin" # or your preferred username
+        existingSecret: "jenkins-admin-password" # Name of your Secret
+        passwordKey: "password"
+
       JCasC:
-        defaultConfig: false
+        defaultConfig: false # You want this disabled
+        overwriteConfiguration: false # Important to avoid overrides
+
+      # Optional but recommended - disable chart's default secret creation
+      adminSecret: false # Prevents chart from creating its own secret
     persistence:
       enabled: true
       storageClass: "longhorn-no-replicas"
