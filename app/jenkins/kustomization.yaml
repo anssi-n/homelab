@@ -4,6 +4,7 @@ resources:
   - jenkins-namespace.yaml
   - jenkins-agent-namespace.yaml
   - tls-secret.yaml
+  - jenkins-admin-password.yaml
   - helm-repository.yaml
   - helm-release.yaml
   - jenkins-agent-rbac.yaml
