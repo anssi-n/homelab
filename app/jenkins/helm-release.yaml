@@ -27,6 +27,8 @@ spec:
         -Xms512m
         -Xmx1536m
         -Djava.awt.headless=true
+      JCasC:
+        defaultConfig: false
     persistence:
       enabled: true
       storageClass: "longhorn-no-replicas"
