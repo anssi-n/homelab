@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - huutoapp/
   - jenkins/
+  - vault/

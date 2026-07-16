@@ -1,0 +1,28 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: vault-injector
+  namespace: vault
+spec:
+  releaseName: vault-agent-injector
+  interval: 10m
+  install:
+    timeout: 30m # Longer for first-time installs (PV provisioning, migrations, etc.)
+  upgrade:
+    timeout: 30m # For subsequent upgrades
+  chart:
+    spec:
+      chart: vault
+      sourceRef:
+        kind: HelmRepository
+        name: hashicorp
+        namespace: vault
+  values:
+    server:
+      enabled: false
+    injector:
+      enabled: true
+      authPath: "auth/homelab-k8s"
+    global:
+      tlsDisable: true
+      externalVaultAddr: "https://vault.anyman.homelab:8200"

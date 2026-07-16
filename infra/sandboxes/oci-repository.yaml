@@ -7,4 +7,4 @@ spec:
   interval: 10m
   url: oci://ghcr.io/kata-containers/kata-deploy-charts/kata-deploy
   ref:
-    semver: ">=3.26.0"
+    semver: ">=3.32.0"
