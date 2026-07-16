@@ -11,3 +11,4 @@ resources:
   - gateway.yaml
   - httproute.yaml
   - clienttrafficpolicy.yaml
+  - mkcert-ca-crt-secret.yaml
