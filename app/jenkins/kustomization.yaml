@@ -12,3 +12,4 @@ resources:
   - httproute.yaml
   - clienttrafficpolicy.yaml
   - mkcert-ca-crt-secret.yaml
+  - harbor-secrets.yaml
