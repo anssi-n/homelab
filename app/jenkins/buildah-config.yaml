@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: buildah-config
+  namespace: jenkins-agents
+data:
+  registries.conf: |
+    unqualified-search-registries = ["docker.io", "quay.io"]
+    short-name-mode = "disabled"
+  policy.json: |
+    {
+        "default": [
+            {
+                "type": "insecureAcceptAnything"
+            }
+        ]
+    }
+  storage.conf: |
+    [storage]
+    driver = "vfs"
+    runroot = "/home/build/.local/share/containers/storage/runroot"
+    graphroot = "/home/build/.local/share/containers/storage"
+
+    [storage.options]
+    additionalimagestores = []

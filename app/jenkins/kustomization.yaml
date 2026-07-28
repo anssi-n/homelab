@@ -13,3 +13,4 @@ resources:
   - clienttrafficpolicy.yaml
   - mkcert-ca-crt-secret.yaml
   - harbor-secrets.yaml
+  - buildah-config.yaml
