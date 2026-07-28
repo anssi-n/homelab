@@ -17,7 +17,10 @@ spec:
         kind: HelmRepository
         name: kyverno
         namespace: kyverno
-  valuesFrom:
-    - kind: ConfigMap
-      name: kyverno-values
-      valuesKey: kyverno-values.yaml
+  values:
+    global:
+      caCertificates:
+        volume:
+          hostPath:
+            path: /etc/ssl/certs/ca-certificates.crt
+            type: File
