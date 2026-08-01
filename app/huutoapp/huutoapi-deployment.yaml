@@ -21,8 +21,26 @@ spec:
       labels:
         app: huutoapi
     spec:
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: huutoapi
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: huutoapi
       securityContext:
+        seccompProfile:
+          type: "RuntimeDefault"
         fsGroup: 101
+        readOnlyRootFilesystem: true
+        runAsNonRoot: true
+        runAsUser: 1000
       serviceAccountName: huutoapi-sa
       volumes:
         - name: images-volume
@@ -40,8 +58,6 @@ spec:
               memory: "1500Mi"
               cpu: "1000m"
           securityContext:
-            runAsNonRoot: true
-            runAsUser: 1000
             allowPrivilegeEscalation: false
             capabilities:
               drop:

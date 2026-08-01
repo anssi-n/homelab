@@ -21,8 +21,26 @@ spec:
       labels:
         app: huutoworker
     spec:
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: huutoworker
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: huutoworker
       securityContext:
+        seccompProfile:
+          type: "RuntimeDefault"
         fsGroup: 101
+        readOnlyRootFilesystem: true
+        runAsNonRoot: true
+        runAsUser: 1000
       serviceAccountName: huutoworker-sa
       volumes:
         - name: images-volume
@@ -40,9 +58,6 @@ spec:
               memory: "250Mi"
               cpu: "150m"
           securityContext:
-            readOnlyRootFilesystem: true
-            runAsNonRoot: true
-            runAsUser: 1000
             allowPrivilegeEscalation: false
             capabilities:
               drop:

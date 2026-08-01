@@ -13,6 +13,11 @@ spec:
   redisExporter:
     enabled: true
     image: quay.io/opstree/redis-exporter:v1.81.0
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - ALL
   storage:
     volumeClaimTemplate:
       spec:
@@ -22,5 +27,13 @@ spec:
           requests:
             storage: 50Mi
   podSecurityContext:
+    seccompProfile:
+      type: "RuntimeDefault"
     runAsUser: 1000
     fsGroup: 1000
+    runAsNonRoot: true
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
