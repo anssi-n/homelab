@@ -6,6 +6,10 @@ metadata:
 spec:
   releaseName: harbor
   interval: 10m
+  install:
+    timeout: 40m # Longer for first-time installs (PV provisioning, migrations, etc.)
+  upgrade:
+    timeout: 40m # For subsequent upgrades
   chart:
     spec:
       chart: harbor

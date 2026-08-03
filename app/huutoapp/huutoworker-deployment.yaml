@@ -38,7 +38,6 @@ spec:
         seccompProfile:
           type: "RuntimeDefault"
         fsGroup: 101
-        readOnlyRootFilesystem: true
         runAsNonRoot: true
         runAsUser: 1000
       serviceAccountName: huutoworker-sa
@@ -58,6 +57,7 @@ spec:
               memory: "250Mi"
               cpu: "150m"
           securityContext:
+            readOnlyRootFilesystem: true
             allowPrivilegeEscalation: false
             capabilities:
               drop:
