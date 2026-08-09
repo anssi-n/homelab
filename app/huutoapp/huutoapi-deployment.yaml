@@ -45,6 +45,9 @@ spec:
         - name: images-volume
           persistentVolumeClaim:
             claimName: huutoapi-images
+        - name: tmp-volume
+          emptyDir:
+            sizeLimit: 500Mi
       containers:
         - image: harbor.anyman.homelab/huutoapp/huutoapi:0.1.11
           name: huutoapi
@@ -68,8 +71,10 @@ spec:
             - configMapRef:
                 name: huutoapp-config
           volumeMounts:
-            - mountPath: /app/media/images
-              name: images-volume
+            - name: tmp-volume
+              mountPath: /tmp
+            - name: images-volume
+              mountPath: /app/media/images
 
           ports:
             - name: liveness-port
