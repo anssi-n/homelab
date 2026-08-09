@@ -46,7 +46,7 @@ spec:
           persistentVolumeClaim:
             claimName: huutoapi-images
       containers:
-        - image: harbor.anyman.homelab/huutoapp/huutoapi@sha256:fc002c475138c2e8b076011913a837e74df6346ffa8ef45b2f80b6faf687e319 # 0.1.10
+        - image: harbor.anyman.homelab/huutoapp/huutoapi:0.1.11
           name: huutoapi
           imagePullPolicy: Always
           resources:
