@@ -16,4 +16,4 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: crossplane
-        namespace: crossplane
+        namespace: crossplane-system
