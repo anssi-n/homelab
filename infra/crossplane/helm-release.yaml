@@ -1,0 +1,19 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: crossplane
+  namespace: crossplane-system
+spec:
+  releaseName: crossplane
+  interval: 10m
+  install:
+    timeout: 30m # Longer for first-time installs (PV provisioning, migrations, etc.)
+  upgrade:
+    timeout: 30m # For subsequent upgrades
+  chart:
+    spec:
+      chart: crossplane
+      sourceRef:
+        kind: HelmRepository
+        name: crossplane
+        namespace: crossplane
