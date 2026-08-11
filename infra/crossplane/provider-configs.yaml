@@ -11,3 +11,16 @@ spec:
       namespace: crossplane-aws
       name: crossplane-aws-creds
       key: creds
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: azure-provider-config
+  namespace: crossplane-azure
+spec:
+  credentials:
+    source: Secret
+    secretRef:
+      namespace: crossplane-azure
+      name: crossplane-azure-creds
+      key: creds

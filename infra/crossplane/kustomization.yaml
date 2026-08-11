@@ -7,3 +7,4 @@ resources:
   - providers.yaml
   - provider-credentials.yaml
   - provider-configs.yaml
+  - functions.yaml
