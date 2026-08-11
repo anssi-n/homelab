@@ -5,3 +5,24 @@ metadata:
   name: upbound-function-patch-and-transform
 spec:
   package: xpkg.upbound.io/upbound/function-patch-and-transform:v0.10.9
+---
+apiVersion: pkg.crossplane.io/v1
+kind: Function
+metadata:
+  name: upbound-function-go-templating
+spec:
+  package: xpkg.upbound.io/upbound/function-go-templating:v0.12.3
+---
+apiVersion: pkg.crossplane.io/v1
+kind: Function
+metadata:
+  name: crossplane-contrib-function-kcl
+spec:
+  package: xpkg.upbound.io/crossplane-contrib/function-kcl:v0.12.2
+---
+apiVersion: pkg.crossplane.io/v1
+kind: Function
+metadata:
+  name: crossplane-contrib-function-python
+spec:
+  package: xpkg.upbound.io/crossplane-contrib/function-python:v0.5.0
