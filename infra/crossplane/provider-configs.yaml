@@ -1,6 +1,6 @@
 ---
 apiVersion: aws.m.upbound.io/v1beta1
-kind: ProviderConfig
+kind: ClusterProviderConfig
 metadata:
   namespace: crossplane-aws
   name: aws-provider-config
@@ -13,7 +13,7 @@ spec:
       key: creds
 ---
 apiVersion: azure.m.upbound.io/v1beta1
-kind: ProviderConfig
+kind: ClusterProviderConfig
 metadata:
   name: azure-provider-config
   namespace: crossplane-azure
