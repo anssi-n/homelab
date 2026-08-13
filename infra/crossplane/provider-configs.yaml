@@ -22,3 +22,11 @@ spec:
       namespace: crossplane-azure
       name: crossplane-azure-creds
       key: creds
+---
+apiVersion: kubernetes.m.crossplane.io/v1alpha1
+kind: ClusterProviderConfig
+metadata:
+  name: homelab-k8s-provider-config
+spec:
+  credentials:
+    source: InjectedIdentity
