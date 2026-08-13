@@ -34,3 +34,10 @@ metadata:
   name: upbound-provider-azure-compute
 spec:
   package: xpkg.upbound.io/upbound/provider-azure-compute:v2.6.2
+---
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: upbound-provider-kubernetes
+spec:
+  package: xpkg.upbound.io/upbound/provider-kubernetes:v1.3.0
