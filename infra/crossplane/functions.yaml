@@ -28,13 +28,20 @@ spec:
           containers:
             - name: package-runtime
               volumeMounts:
-                - mountPath: /templates/devvm
-                  name: devvm-templates
+                - mountPath: /templates/azure/devvm
+                  name: devvm-azure-templates
+                  readOnly: true
+                - mountPath: /templates/aws/k8s
+                  name: k8s-aws-templates
                   readOnly: true
           volumes:
-            - name: devvm-templates
+            - name: devvm-azure-templates
               configMap:
-                name: devvm-go-templates
+                name: devvm-azure-go-templates
+            - name: k8s-aws-templates
+              configMap:
+                name: k8s-aws-go-templates
+
 ---
 apiVersion: pkg.crossplane.io/v1
 kind: Function
