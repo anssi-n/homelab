@@ -28,13 +28,13 @@ spec:
           containers:
             - name: package-runtime
               volumeMounts:
-                - mountPath: /templates
+                - mountPath: /templates/devvm
                   name: templates
                   readOnly: true
           volumes:
-            - name: templates
+            - name: devvm-templates
               configMap:
-                name: go-templates
+                name: devvm-go-templates
 ---
 apiVersion: pkg.crossplane.io/v1
 kind: Function
