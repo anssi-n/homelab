@@ -29,7 +29,7 @@ spec:
             - name: package-runtime
               volumeMounts:
                 - mountPath: /templates/devvm
-                  name: templates
+                  name: devvm-templates
                   readOnly: true
           volumes:
             - name: devvm-templates
