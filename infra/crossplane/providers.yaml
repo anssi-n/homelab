@@ -5,7 +5,7 @@ metadata:
   name: upbound-provider-aws-ec2
   namespace: crossplane-system
 spec:
-  package: xpkg.upbound.io/upbound/provider-aws-ec2:v2.6.3
+  package: xpkg.upbound.io/upbound/provider-aws-ec2:v2.7.0
 ---
 apiVersion: pkg.crossplane.io/v1
 kind: Provider
