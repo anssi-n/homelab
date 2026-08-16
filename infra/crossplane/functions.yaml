@@ -31,6 +31,9 @@ spec:
                 - mountPath: /templates/azure/devvm
                   name: devvm-azure-templates
                   readOnly: true
+                - mountPath: /templates/aws/devvm
+                  name: devvm-aws-templates
+                  readOnly: true
                 - mountPath: /templates/aws/k8s
                   name: k8s-aws-templates
                   readOnly: true
@@ -38,6 +41,9 @@ spec:
             - name: devvm-azure-templates
               configMap:
                 name: devvm-azure-go-templates
+            - name: devvm-aws-templates
+              configMap:
+                name: devvm-aws-go-templates
             - name: k8s-aws-templates
               configMap:
                 name: k8s-aws-go-templates
