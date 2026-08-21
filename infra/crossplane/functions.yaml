@@ -49,10 +49,3 @@ metadata:
   name: crossplane-contrib-function-sequencer
 spec:
   package: xpkg.upbound.io/crossplane-contrib/function-sequencer:v0.6.0
----
-apiVersion: pkg.crossplane.io/v1
-kind: Function
-metadata:
-  name: crossplane-contrib-function-sequencer
-spec:
-  package: xpkg.upbound.io/crossplane-contrib/function-sequencer:v0.6.0
