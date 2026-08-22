@@ -8,8 +8,8 @@ spec:
     source: Secret
     secretRef:
       namespace: crossplane-aws
-      name: crossplane-aws-creds
-      key: creds
+      name: aws-crossplane-credentials
+      key: credentials
 ---
 apiVersion: azure.m.upbound.io/v1beta1
 kind: ClusterProviderConfig
