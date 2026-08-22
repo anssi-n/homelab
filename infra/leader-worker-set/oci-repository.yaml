@@ -6,3 +6,5 @@ metadata:
 spec:
   interval: 10m
   url: oci://registry.k8s.io/lws/charts/lws
+  ref:
+  semver: "=0.10.0"
