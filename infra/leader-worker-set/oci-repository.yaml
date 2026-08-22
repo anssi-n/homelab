@@ -1,0 +1,8 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: OCIRepository
+metadata:
+  name: leader-worker-set
+  namespace: lws-system
+spec:
+  interval: 10m
+  url: oci://registry.k8s.io/lws/charts

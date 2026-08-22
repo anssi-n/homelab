@@ -1,0 +1,12 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: leader-worker-set
+  namespace: lws-system
+spec:
+  releaseName: lws
+  interval: 10m
+  chartRef:
+    kind: OCIRepository
+    name: leader-worker-set
+    namespace: lws-system

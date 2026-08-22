@@ -21,6 +21,7 @@ resources:
   - EFK-operators/
   - tetragon/
   - crossplane/
+  - leader-worker-set/
 #  - prometheus/
 # - opa-gatekeeper/
 # - sandboxes/
