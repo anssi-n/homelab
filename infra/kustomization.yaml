@@ -19,9 +19,9 @@ resources:
   - llmkube/
   - agent-sandbox/
   - EFK-operators/
-  - tetragon/
-  - crossplane/
   - leader-worker-set/
+#  - tetragon/
+#  - crossplane/
 #  - prometheus/
 # - opa-gatekeeper/
 # - sandboxes/
