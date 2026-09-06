@@ -21,3 +21,9 @@ spec:
         superuser: false
         passwordSecret:
           name: huutoapp-db-secret
+      - name: vaultuser
+        ensure: present
+        login: true
+        superuser: false
+        passwordSecret:
+          name: vaultuser-db-secret
