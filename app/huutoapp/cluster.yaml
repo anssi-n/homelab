@@ -24,6 +24,6 @@ spec:
       - name: vaultuser
         ensure: present
         login: true
-        superuser: false
+        superuser: true
         passwordSecret:
           name: vaultuser-db-secret
