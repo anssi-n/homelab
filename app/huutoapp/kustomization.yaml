@@ -16,3 +16,4 @@ resources:
   - huutoapi-deployment.yaml
   - huutoworker-deployment.yaml
   - network-policies.yaml
+  - huutoapp-dynamic-db-secret.yaml
