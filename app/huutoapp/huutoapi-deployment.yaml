@@ -48,8 +48,12 @@ spec:
         - name: tmp-volume
           emptyDir:
             sizeLimit: 500Mi
+            volumes:
+        - name: db-creds
+          secret:
+            secretName: huutoapp-dynamic-creds
       containers:
-        - image: harbor.anyman.homelab/huutoapp/huutoapi@sha256:b0504a04ee76096cfc28b35d818d6df304efc3e0ad6047eec61c8f48a722cbbf # 0.1.2
+        - image: harbor.anyman.homelab/huutoapp/huutoapi@sha256:2b3c13393dcd068f7937854d8c9811955ad78f27a39de5a977038256919f9c96 # 0.1.14
           name: huutoapi
           imagePullPolicy: Always
           resources:
@@ -75,7 +79,9 @@ spec:
               mountPath: /tmp
             - name: images-volume
               mountPath: /app/media/images
-
+            - name: db-creds
+              mountPath: /etc/secrets/db
+              readOnly: true
           ports:
             - name: liveness-port
               containerPort: 8000

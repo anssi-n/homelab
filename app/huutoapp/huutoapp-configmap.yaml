@@ -8,6 +8,7 @@ data:
   DATABASE_HOST: huutoapp-db-rw
   DATABASE_PORT: "5432"
   DATABASE_NAME: huutoapp
+  DATABASE_CREDENTIAL_DIR: /etc/secrets/db
   REDIS_HOST: redis
   REDIS_PORT: "6379"
   REDIS_DB_NUMBER: "0"

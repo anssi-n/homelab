@@ -45,8 +45,11 @@ spec:
         - name: images-volume
           persistentVolumeClaim:
             claimName: huutoapi-images
+        - name: db-creds
+          secret:
+            secretName: huutoapp-dynamic-creds
       containers:
-        - image: harbor.anyman.homelab/huutoapp/huutoworker@sha256:5ec7220ca89cb141160727b241bf4ca52383074126e654f65630311b2dd252ef # 0.1.12
+        - image: harbor.anyman.homelab/huutoapp/huutoworker@sha256:0ed717f3d4d11cf0b4c984181070f64ce27c44676c4ce97b13f509941f8eb9fd # 0.1.14
           name: huutoworker
           imagePullPolicy: Always
           resources:
@@ -70,6 +73,9 @@ spec:
           volumeMounts:
             - mountPath: /app/media/images
               name: images-volume
+            - name: db-creds
+              mountPath: /etc/secrets/db
+              readOnly: true
 ---
 apiVersion: v1
 kind: Service
