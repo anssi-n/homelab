@@ -49,7 +49,7 @@ spec:
           secret:
             secretName: huutoapp-dynamic-creds
       containers:
-        - image: harbor.anyman.homelab/huutoapp/huutoworker@sha256:86a31b80f30dd2a3bdccc504503ba1f43eb0ff669529e143996ba81ff11e3f48 # 0.2.2
+        - image: harbor.anyman.homelab/huutoapp/huutoworker@sha256:12757418fe1181e0bc2ce6181181d905ffcd1af68402328a8c1b63d1614cabcf # 0.2.3
           name: huutoworker
           imagePullPolicy: Always
           resources:
