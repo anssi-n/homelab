@@ -1,0 +1,98 @@
+---
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: harbor-ca-cert
+  namespace: flux-system
+spec:
+  refreshInterval: 1h0m0s
+  secretStoreRef:
+    name: vault-backend
+    kind: ClusterSecretStore
+  target:
+    name: harbor-ca-cert
+    deletionPolicy: Delete
+  data:
+    - secretKey: ca.crt
+      remoteRef:
+        key: harbor
+        property: harbor-ca-cert
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: huutoapi
+  namespace: flux-system
+spec:
+  image: harbor.anyman.homelab/huutoapp/huutoapi
+  interval: 5m
+  certSecretRef:
+    name: harbor-ca-cert
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: huutoworker
+  namespace: flux-system
+spec:
+  image: harbor.anyman.homelab/huutoapp/huutoworker
+  interval: 5m
+  certSecretRef:
+    name: harbor-ca-cert
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: huutoapi
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: huutoapi
+  filterTags:
+    pattern: "^(.{0,3}|[^d].*|d[^e].*|de[^v].*|dev[^-].*)$"
+  digestReflectionPolicy: IfNotPresent
+  policy:
+    semver:
+      range: ">=0.0.1"
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: huutoworker
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: huutoworker
+  filterTags:
+    pattern: "^(.{0,3}|[^d].*|d[^e].*|de[^v].*|dev[^-].*)$"
+  digestReflectionPolicy: IfNotPresent
+  policy:
+    semver:
+      range: ">=0.0.1"
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageUpdateAutomation
+metadata:
+  name: flux-system
+  namespace: flux-system
+spec:
+  interval: 30m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  git:
+    checkout:
+      ref:
+        branch: main
+    commit:
+      author:
+        name: fluxcdbot
+        email: fluxcdbot@noreply.anyman.homelab
+      messageTemplate: |
+        Automated image update
+        {{range .Changed.Changes}}{{print .OldValue}} -> {{println .NewValue}}{{end}}
+    push:
+      branch: main
+  update:
+    path: ./app/huutoapp
+    strategy: Setters

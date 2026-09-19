@@ -6,3 +6,4 @@ resources:
   - tls/
   - kafka-cluster/
   - EFK-stack/
+  - image-updater/
