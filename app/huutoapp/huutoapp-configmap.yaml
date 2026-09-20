@@ -1,8 +1,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: huutoapp-config
+  name: huutoapp-config-v1.0
   namespace: huutoapp
+immutable: true
 data:
   DATABASE_USER: huutoapp
   DATABASE_HOST: huutoapp-db-rw
