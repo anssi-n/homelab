@@ -97,3 +97,10 @@ spec:
               port: liveness-port
             failureThreshold: 30
             periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
