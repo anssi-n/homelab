@@ -73,7 +73,7 @@ spec:
             - secretRef:
                 name: huutoapp-secrets
             - configMapRef:
-                name: huutoapp-config-v1.0
+                name: huutoapp-config-v1.1
           volumeMounts:
             - name: tmp-volume
               mountPath: /tmp

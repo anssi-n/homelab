@@ -1,7 +1,47 @@
+---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: huutoapp-config-v1.0
+  namespace: huutoapp
+immutable: true
+data:
+  DATABASE_USER: huutoapp
+  DATABASE_HOST: huutoapp-db-rw
+  DATABASE_PORT: "5432"
+  DATABASE_NAME: huutoapp
+  DATABASE_CREDENTIAL_DIR: /etc/secrets/db
+  REDIS_HOST: redis
+  REDIS_PORT: "6379"
+  REDIS_DB_NUMBER: "0"
+  REDIS_QUEUE_NAME: publish_queue
+  MAX_IMAGE_SIZE: "10485760"
+  FAVICON_FILE: favicon.ico
+  LOGGING_CONFIG_HOST: localhost
+  LOGGING_CONFIG_PORT: "5050"
+  HUUTO_USERNAME: _anssi
+  POSTAL_CODE: "33720"
+  DELIVERY_TERMS: "
+
+    Tavallisten DVD ja Blu-Ray -julkaisujen postikuluja voidaan yhdistää
+    seuraavasti:
+
+    1-2 kpl 4,20€
+
+    3-4 kpl 5,90€
+
+    5+ kpl 6,90€
+
+    Ei koske erikoisjulkaisuja kuten esim. digibookit, steelbookit ja isommat
+    TV-sarjaboksit."
+  PAYMENT_TERMS: "Tilisiirto, MobilePay tai käteinen"
+  MAX_RETRIES: "2"
+  WORKER_PROMETHEUS_PORT: "8080"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: huutoapp-config-v1.1
   namespace: huutoapp
 immutable: true
 data:
