@@ -17,3 +17,4 @@ resources:
   - huutoworker-deployment.yaml
   - network-policies.yaml
   - huutoapp-dynamic-db-secret.yaml
+  - kyverno-image-signing-policy.yaml

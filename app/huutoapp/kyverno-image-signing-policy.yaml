@@ -1,0 +1,53 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cosign-public-key
+  namespace: huutoapp
+data:
+  cosign.pub: |
+    -----BEGIN PUBLIC KEY-----
+    MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE54Fe70gjCdDCOdAyZGAxTHn51P7c
+    DC6bSJSpq+Ejm1ZXLk2Qsfb8O0CNvAyCVoUMvUOmb85g2WNbQi10qQFdhQ==
+    -----END PUBLIC KEY-----
+---
+apiVersion: policies.kyverno.io/v1
+kind: NamespacedImageValidatingPolicy
+metadata:
+  name: verify-signed-huutoapp-images
+  namespace: huutoapp
+spec:
+  validationActions:
+    - Deny
+  failurePolicy: Fail
+  webhookConfiguration:
+    timeoutSeconds: 30
+  evaluation:
+    background:
+      enabled: true
+  matchConstraints:
+    resourceRules:
+      - apiGroups: [""]
+        apiVersions: ["v1"]
+        operations: ["CREATE", "UPDATE"]
+        resources: ["pods"]
+  matchImageReferences:
+    - glob: "harbor.anyman.homelab/huutoapp/*"
+
+  variables:
+    - name: cosignKey
+      expression: >-
+        resource.Get("v1", "configmaps", "cosign-public-key").data["cosign.pub"]
+
+  attestors:
+    - name: cosign
+      cosign:
+        key:
+          expression: variables.cosignKey
+
+  validations:
+    - expression: >-
+        images.containers.map(image,
+          verifyImageSignatures(image, [attestors.cosign])
+        ).all(e, e > 0)
+      message: "All HuutoApp images must be signed!"
