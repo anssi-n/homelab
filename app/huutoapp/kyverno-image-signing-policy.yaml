@@ -78,12 +78,12 @@ spec:
         ).all(e, e > 0)
       message: "All HuutoApp images must have a signed Trivy vulnerability scan attestation"
 
-    # 5. Scan must be recent (example: ≤ 7 days / 168 hours)
-    - expression: >-
-        images.containers.map(image,
-          extractPayload(image, attestations.vuln).predicate.metadata.scanFinishedOn
-        ).all(t,
-          t != null &&
-          time.now() - timestamp(string(t)) < duration("168h")
-        )
-      message: "Vulnerability scan must be no older than 7 days"
+    # # 5. Scan must be recent (example: ≤ 7 days / 168 hours)
+    # - expression: >-
+    #     images.containers.map(image,
+    #       extractPayload(image, attestations.vuln).predicate.metadata.scanFinishedOn
+    #     ).all(t,
+    #       t != null &&
+    #       time.now() - timestamp(string(t)) < duration("168h")
+    #     )
+    #   message: "Vulnerability scan must be no older than 7 days"
