@@ -84,6 +84,6 @@ spec:
           extractPayload(image, attestations.vuln).predicate.metadata.scanFinishedOn
         ).all(t,
           t != null &&
-          time.now() - timestamp(string(t)) < duration("168")
+          time.now() - timestamp(string(t)) < duration("168h")
         )
       message: "Vulnerability scan must be no older than 7 days"
