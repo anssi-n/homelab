@@ -45,9 +45,45 @@ spec:
         key:
           expression: variables.cosignKey
 
+  attestations:
+    # SBOM attestation
+    - name: sbom
+      intoto:
+        type: https://cyclonedx.org/bom
+
+    # Trivy vulnerability scan attestation
+    - name: vuln
+      intoto:
+        type: https://cosign.sigstore.dev/attestation/vuln/v1
+
   validations:
+    # 1. Image must be signed
     - expression: >-
         images.containers.map(image,
           verifyImageSignatures(image, [attestors.cosign])
         ).all(e, e > 0)
       message: "All HuutoApp images must be signed!"
+
+    # 2. SBOM attestation must exist and be signed
+    - expression: >-
+        images.containers.map(image,
+          verifyAttestationSignatures(image, attestations.sbom, [attestors.cosign])
+        ).all(e, e > 0)
+      message: "All HuutoApp images must have a signed SBOM attestation"
+
+    # 4. Vulnerability scan attestation must exist and be signed
+    - expression: >-
+        images.containers.map(image,
+          verifyAttestationSignatures(image, attestations.vuln, [attestors.cosign])
+        ).all(e, e > 0)
+      message: "All HuutoApp images must have a signed Trivy vulnerability scan attestation"
+
+    # 5. Scan must be recent (example: ≤ 7 days / 168 hours)
+    - expression: >-
+        images.containers.map(image,
+          extractPayload(image, attestations.vuln).predicate.metadata.scanFinishedOn
+        ).all(t,
+          t != null &&
+          time.now() - timestamp(string(t)) < duration("168")
+        )
+      message: "Vulnerability scan must be no older than 7 days"
