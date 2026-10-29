@@ -5,6 +5,8 @@ expose:
     secret:
       secretName: "harbor-tls"
 externalURL: https://harbor.anyman.homelab
+updateStrategy:
+  type: Recreate
 persistence:
   enabled: true
   resourcePolicy: "keep"
