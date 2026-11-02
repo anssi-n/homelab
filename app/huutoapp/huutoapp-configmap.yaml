@@ -43,7 +43,7 @@ kind: ConfigMap
 metadata:
   name: huutoapp-config-v1.1
   namespace: huutoapp
-immutable: true
+immutable: false
 data:
   DATABASE_USER: huutoapp
   DATABASE_HOST: huutoapp-db-rw
