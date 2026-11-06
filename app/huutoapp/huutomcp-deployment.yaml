@@ -68,6 +68,11 @@ spec:
               value: /etc/ssl/certs/keycloak-ca-cert.crt
             - name: TOOL_DOCS_PATH
               value: /config/tool-docs.yaml
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: huutoapp-secrets
+                  key: REDIS_PASSWORD
           volumeMounts:
             - name: keycloak-ca
               mountPath: /etc/ssl/certs/keycloak-ca-cert.crt
@@ -79,6 +84,28 @@ spec:
             - name: db-creds
               mountPath: /etc/secrets/db
               readOnly: true
+          ports:
+            - name: liveness-port
+              containerPort: 8000
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: liveness-port
+            failureThreshold: 1
+            periodSeconds: 10
+          startupProbe:
+            httpGet:
+              path: /health
+              port: liveness-port
+            failureThreshold: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: liveness-port
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
       volumes:
         - name: keycloak-ca
           secret:
