@@ -1,0 +1,18 @@
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: keycloak-ca-cert
+  namespace: huutoapp
+spec:
+  refreshInterval: 1h0m0s
+  secretStoreRef:
+    name: vault-backend
+    kind: ClusterSecretStore
+  target:
+    name: keycloak-ca-cert
+    deletionPolicy: Delete
+  data:
+    - secretKey: ca.crt
+      remoteRef:
+        key: keycloak
+        property: keycloak-ca-cert
