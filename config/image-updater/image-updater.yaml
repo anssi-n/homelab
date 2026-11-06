@@ -41,6 +41,17 @@ spec:
     name: harbor-ca-cert
 ---
 apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: huutomcp
+  namespace: flux-system
+spec:
+  image: harbor.anyman.homelab/huutoapp/huutomcp
+  interval: 5m
+  certSecretRef:
+    name: harbor-ca-cert
+---
+apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImagePolicy
 metadata:
   name: huutoapi
@@ -63,6 +74,21 @@ metadata:
 spec:
   imageRepositoryRef:
     name: huutoworker
+  filterTags:
+    pattern: "^(.{0,3}|[^d].*|d[^e].*|de[^v].*|dev[^-].*)$"
+  digestReflectionPolicy: IfNotPresent
+  policy:
+    semver:
+      range: ">=0.0.1"
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: huutomcp
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: huutomcp
   filterTags:
     pattern: "^(.{0,3}|[^d].*|d[^e].*|de[^v].*|dev[^-].*)$"
   digestReflectionPolicy: IfNotPresent

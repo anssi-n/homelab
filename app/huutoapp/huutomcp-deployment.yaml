@@ -1,0 +1,90 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: huutomcp-sa
+  namespace: huutoapp
+automountServiceAccountToken: false
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: huutomcp
+  name: huutomcp
+  namespace: huutoapp
+spec:
+  selector:
+    matchLabels:
+      app: huutomcp
+  template:
+    metadata:
+      labels:
+        app: huutomcp
+    spec:
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: huutomcp
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: huutomcp
+      securityContext:
+        seccompProfile:
+          type: "RuntimeDefault"
+        fsGroup: 101
+        runAsNonRoot: true
+        runAsUser: 1000
+      serviceAccountName: huutomcp-sa
+      containers:
+        - image: harbor.anyman.homelab/huutoapp/huutomcp@sha256:3f73be0e7df91b15033af25fd389b3d82daa0fcf80cc4f30e8c0765a1888083c # {"$imagepolicy": "flux-system:huutomcp"}
+          name: huutomcp
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "200Mi"
+              cpu: "200m"
+            limits:
+              memory: "1500Mi"
+              cpu: "1000m"
+          securityContext:
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+          envFrom:
+            - configMapRef:
+                name: huutomcp-config-v1.0
+          env:
+            - name: SSL_CERT_FILE
+              value: /etc/ssl/certs/keycloak-ca-cert.crt
+            - name: TOOL_DOCS_PATH
+              value: /config/tool-docs.yaml
+          volumeMounts:
+            - name: keycloak-ca
+              mountPath: /etc/ssl/certs/keycloak-ca-cert.crt
+              subPath: ca.crt
+              readOnly: true
+            - name: tool-docs
+              mountPath: /config
+              readOnly: true
+            - name: db-creds
+              mountPath: /etc/secrets/db
+              readOnly: true
+      volumes:
+        - name: keycloak-ca
+          secret:
+            secretName: keycloak-ca-cert
+        - name: tool-docs
+          configMap:
+            name: huutoapp-mcp-tool-docs-v1.0
+        - name: db-creds
+          secret:
+            secretName: huutoapp-dynamic-creds

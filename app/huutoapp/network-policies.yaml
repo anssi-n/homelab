@@ -198,6 +198,15 @@ spec:
         - ports:
             - port: "5432"
               protocol: TCP
+
+    # Traffic from mcp server
+    - fromEndpoints:
+        - matchLabels:
+            app: huutomcp
+      toPorts:
+        - ports:
+            - port: "5432"
+              protocol: TCP
 ---
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
@@ -238,3 +247,53 @@ spec:
         - ports:
             - port: "6379"
               protocol: TCP
+
+    # Traffic from mcp server
+    - fromEndpoints:
+        - matchLabels:
+            app: huutomcp
+      toPorts:
+        - ports:
+            - port: "6379"
+              protocol: TCP
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: allow-huutomcp-traffic
+  namespace: huutoapp
+spec:
+  description: "Allow ingress and egress traffic to and from huutomcp pods"
+  endpointSelector:
+    matchLabels:
+      app: huutomcp
+  ingress:
+    - fromEndpoints:
+        - {}
+
+    - fromEntities:
+        - world
+        - cluster
+
+  egress:
+    # Traffic to redis
+    - toEndpoints:
+        - matchLabels:
+            app: redis
+      toPorts:
+        - ports:
+            - port: "6379"
+              protocol: TCP
+
+    # Traffic to DBs
+    - toEndpoints:
+        - matchLabels:
+            app.kubernetes.io/instance: huutoapp-db
+      toPorts:
+        - ports:
+            - port: "5432"
+              protocol: TCP
+
+    - toEntities:
+        - world
+        - cluster

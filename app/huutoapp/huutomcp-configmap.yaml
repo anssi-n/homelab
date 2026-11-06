@@ -1,0 +1,22 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: huutomcp-config-v1.0
+  namespace: huutoapp
+immutable: true
+data:
+  DATABASE_USER: huutoapp
+  DATABASE_HOST: huutoapp-db-rw.huutoapp.svc.cluster.local
+  DATABASE_PORT: "5432"
+  DATABASE_NAME: huutoapp
+  DATABASE_CREDENTIAL_DIR: /etc/secrets/db
+  REDIS_HOST: redis
+  REDIS_PORT: "6379"
+  REDIS_DB_NUMBER: "0"
+  REDIS_QUEUE_NAME: publish_queue
+  HUUTOAPP_MCP_IDP_URL: https://keycloak.anyman.homelab:8443
+  HUUTOAPP_MCP_IDP_REALM: homelab
+  HUUTOAPP_MCP_IDP_AUDIENCE: http://localhost:8000
+  HUUTOAPP_MCP_SERVER_URL: http://localhost:8000
+  HUUTOAPP_MCP_TOOL_DOCS_PATH: /config

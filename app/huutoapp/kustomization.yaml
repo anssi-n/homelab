@@ -18,3 +18,7 @@ resources:
   - network-policies.yaml
   - huutoapp-dynamic-db-secret.yaml
   - kyverno-image-signing-policy.yaml
+  - keycloak-ca-cert.yaml
+  - huutomcp-tool-docs.yaml
+  - huutomcp-configmap.yaml
+  - huutomcp-deployment.yaml
