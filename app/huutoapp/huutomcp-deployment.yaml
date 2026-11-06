@@ -61,6 +61,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: huutomcp-config-v1.0
+            - secretRef:
+                name: huutoapp-secrets
           env:
             - name: SSL_CERT_FILE
               value: /etc/ssl/certs/keycloak-ca-cert.crt
