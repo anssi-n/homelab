@@ -13,6 +13,22 @@ spec:
             matchLabels:
               app: huutomcp
 ---
+apiVersion: agentgateway.dev/v1alpha1
+kind: AgentgatewayBackend
+metadata:
+  name: keycloak-jwks
+  namespace: huutoapp
+spec:
+  static:
+    host: keycloak.anyman.homelab
+    port: 8443
+  policies:
+    tls:
+      sni: keycloak.anyman.homelab
+      caCertificateRefs:
+        - name: keycloak-ca-cert
+          kind: Secret
+---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:

@@ -1,0 +1,62 @@
+---
+apiVersion: agentgateway.dev/v1alpha1
+kind: AgentgatewayPolicy
+metadata:
+  name: huutoapp-mcp-authentication
+  namespace: huutoapp
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: huutoapp-mcp
+  traffic:
+    # Authentication – validate JWT + publish MCP Protected Resource Metadata
+    jwtAuthentication:
+      mode: Strict
+      providers:
+        - issuer: "https://keycloak.anyman.homelab:8443/realms/homelab"
+          audiences:
+            - "http://localhost:8000"
+          jwks:
+            remote:
+              backendRef:
+                group: agentgateway.dev
+                kind: AgentgatewayBackend
+                name: keycloak-jwks
+                namespace: huutoapp
+                port: 8443
+              jwksPath: "/realms/homelab/protocol/openid-connect/certs"
+              cacheDuration: "5m"
+
+      # Enable full MCP OAuth discovery / WWW-Authenticate behaviour
+      mcp:
+        provider: Keycloak
+        resourceMetadata:
+          resource: "https://huutoapp.mcp.anyman.homelab/mcp"
+          scopesSupported:
+            - "mcp:huutoapp:public"
+            - "mcp:huutoapp:admin"
+          bearerMethodsSupported:
+            - header
+            - body
+            - query
+---
+apiVersion: agentgateway.dev/v1alpha1
+kind: AgentgatewayPolicy
+metadata:
+  name: huutoapp-mcp-authorization0
+  namespace: huutoapp
+spec:
+  targetRefs:
+    - group: agentgateway.dev
+      kind: AgentgatewayBackend
+      name: huutoapp-mcp-backend
+  backend:
+    mcp:
+      authorization:
+        action: Allow
+        policy:
+          matchExpressions:
+            - "!has(mcp.tool)"
+            - 'mcp.tool.name in ["list_titles","search_titles"] && jwt.scope.split(" ").contains("mcp:huutoapp:public")'
+            - 'mcp.tool.name == "admin_tool" && jwt.scope.split(" ").contains("mcp:huutoapp:admin")'

@@ -24,3 +24,4 @@ resources:
   - huutomcp-deployment.yaml
   - huutomcp-service.yaml
   - huutomcp-httproute.yaml
+  - authentication-authorization-policies.yaml
