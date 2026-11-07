@@ -22,3 +22,5 @@ resources:
   - huutomcp-tool-docs.yaml
   - huutomcp-configmap.yaml
   - huutomcp-deployment.yaml
+  - huutomcp-service.yaml
+  - huutomcp-httproute.yaml
