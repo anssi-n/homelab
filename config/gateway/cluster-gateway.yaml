@@ -1,0 +1,126 @@
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: EnvoyProxy
+metadata:
+  name: cluster-gateway-config
+  namespace: infra
+spec:
+  provider:
+    type: Kubernetes
+    kubernetes:
+      envoyDeployment:
+        replicas: 2
+        pod:
+          topologySpreadConstraints:
+            - maxSkew: 1
+              topologyKey: kubernetes.io/hostname
+              whenUnsatisfiable: ScheduleAnyway
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: envoy
+            - maxSkew: 1
+              topologyKey: topology.kubernetes.io/zone
+              whenUnsatisfiable: ScheduleAnyway
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: envoy
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: cluster-gateway
+  namespace: infra
+spec:
+  gatewayClassName: envoy
+  infrastructure:
+    parametersRef:
+      group: gateway.envoyproxy.io
+      kind: EnvoyProxy
+      name: cluster-gateway-config
+  listeners:
+    - name: huutoapp-db
+      protocol: TCP
+      port: 5432
+      allowedRoutes:
+        namespaces:
+          from: Selector
+          selector:
+            matchLabels:
+              allow-cluster-gateway: "true"
+
+    - name: huutoapp-redis
+      protocol: TCP
+      port: 6379
+      allowedRoutes:
+        namespaces:
+          from: Selector
+          selector:
+            matchLabels:
+              allow-cluster-gateway: "true"
+
+    - name: huutoapp-https
+      protocol: HTTPS
+      port: 443
+      hostname: huutoapp.anyman.homelab
+      tls:
+        certificateRefs:
+          - kind: Secret
+            group: ""
+            name: huutoapp-secrets
+      allowedRoutes:
+        namespaces:
+          from: Selector
+          selector:
+            matchLabels:
+              allow-cluster-gateway: "true"
+
+    - name: harbor-https
+      protocol: HTTPS
+      port: 443
+      hostname: harbor.anyman.homelab
+      tls:
+        certificateRefs:
+          - group: ""
+            kind: Secret
+            name: harbor-tls
+        mode: Terminate
+      allowedRoutes:
+        namespaces:
+          from: Selector
+          selector:
+            matchLabels:
+              allow-cluster-gateway: "true"
+
+    - name: jenkins-https
+      protocol: HTTPS
+      port: 443
+      hostname: jenkins.anyman.homelab
+      tls:
+        certificateRefs:
+          - group: ""
+            kind: Secret
+            name: jenkins-tls
+        mode: Terminate
+      allowedRoutes:
+        namespaces:
+          from: Selector
+          selector:
+            matchLabels:
+              allow-cluster-gateway: "true"
+
+    - name: longhorn-https
+      protocol: HTTPS
+      port: 443
+      hostname: longhorn.k8s.anyman.homelab
+      tls:
+        certificateRefs:
+          - group: ""
+            kind: Secret
+            name: longhorn-ui-cert
+            namespace: longhorn-system
+        mode: Terminate
+      allowedRoutes:
+        namespaces:
+          from: Selector
+          selector:
+            matchLabels:
+              allow-cluster-gateway: "true"

@@ -268,12 +268,23 @@ spec:
     matchLabels:
       app: huutomcp
   ingress:
+    # Traffic from ai gateway
     - fromEndpoints:
-        - {}
+        - matchLabels:
+            io.kubernetes.pod.namespace: infra
+      toPorts:
+        - ports:
+            - port: "8000"
+              protocol: TCP
 
-    - fromEntities:
-        - world
-        - cluster
+    # Traffic from prometheus to metrics endpoint
+    - fromEndpoints:
+        - matchLabels:
+            io.kubernetes.pod.namespace: monitoring
+      toPorts:
+        - ports:
+            - port: "8000"
+              protocol: TCP
 
   egress:
     # Traffic to redis

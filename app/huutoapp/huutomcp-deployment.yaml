@@ -21,7 +21,6 @@ spec:
       labels:
         app: huutomcp
     spec:
-      hostUsers: false
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: kubernetes.io/hostname
