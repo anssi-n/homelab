@@ -1,0 +1,22 @@
+---
+kind: Gateway
+metadata:
+  name: ai-gateway
+  namespace: infra
+spec:
+  gatewayClassName: agentgateway
+  listeners:
+    - name: https-mcp
+      protocol: HTTPS
+      port: 443
+      hostname: "*.mcp.anyman.homelab"
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: mcp-wildcard-tls-secret
+      allowedRoutes:
+        namespaces:
+          from: Selector
+          selector:
+            matchLabels:
+              allow-ai-gateway: "true"

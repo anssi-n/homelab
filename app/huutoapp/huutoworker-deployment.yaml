@@ -21,6 +21,7 @@ spec:
       labels:
         app: huutoworker
     spec:
+      hostUsers: false
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: kubernetes.io/hostname
