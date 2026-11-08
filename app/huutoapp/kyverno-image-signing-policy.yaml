@@ -25,6 +25,10 @@ spec:
   evaluation:
     background:
       enabled: true
+  matchConditions:
+    - name: skip-inactive-owners
+      expression: >-
+        !has(object.status.replicas) || object.status.replicas > 0
   matchConstraints:
     resourceRules:
       - apiGroups: [""]
