@@ -5,7 +5,8 @@ metadata:
   namespace: huutoapp
 spec:
   parentRefs:
-    - name: huutoapp-gateway
+    - name: cluster-gateway
+      namespace: infra
       sectionName: huutoapp-db
   rules:
     - backendRefs:
@@ -19,8 +20,9 @@ metadata:
   namespace: huutoapp
 spec:
   parentRefs:
-    - name: huutoapp-gateway
-      sectionName: redis
+    - name: cluster-gateway
+      namespace: infra
+      sectionName: huutoapp-redis
   rules:
     - backendRefs:
         - name: redis

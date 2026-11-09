@@ -5,10 +5,10 @@ metadata:
   namespace: huutoapp
 spec:
   parentRefs:
-    - name: huutoapp-gateway
-      sectionName: https
+    - name: cluster-gateway
+      namespace: infra
+      sectionName: huutoapp-https
       kind: Gateway
-
   rules:
     - matches:
         - path:
