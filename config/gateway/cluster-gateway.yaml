@@ -123,3 +123,25 @@ spec:
           selector:
             matchLabels:
               allow-cluster-gateway: "true"
+
+    - name: kafka-listener
+      protocol: TLS
+      port: 9092
+      tls:
+        mode: Passthrough
+      allowedRoutes:
+        namespaces:
+          from: Selector
+          selector:
+            matchLabels:
+              allow-cluster-gateway: "true"
+
+    - name: qdrant
+      protocol: HTTP
+      port: 6333
+      allowedRoutes:
+        namespaces:
+          from: Selector
+          selector:
+            matchLabels:
+              allow-cluster-gateway: "true"

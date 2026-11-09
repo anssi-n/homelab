@@ -5,7 +5,8 @@ metadata:
   namespace: qdrant
 spec:
   parentRefs:
-    - name: qdrant-gateway
+    - name: cluster-gateway
+      namespace: infra
       sectionName: qdrant
       kind: Gateway
 

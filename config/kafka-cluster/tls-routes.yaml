@@ -9,8 +9,8 @@ spec:
   parentRefs:
     - group: gateway.networking.k8s.io
       kind: Gateway
-      name: kafka-gateway
-      namespace: kafka-cluster
+      name: cluster-gateway
+      namespace: infra
       sectionName: kafka-listener
   rules:
     - backendRefs:
@@ -30,8 +30,8 @@ spec:
   parentRefs:
     - group: gateway.networking.k8s.io
       kind: Gateway
-      name: kafka-gateway
-      namespace: kafka-cluster
+      name: cluster-gateway
+      namespace: infra
       sectionName: kafka-listener
   rules:
     - backendRefs:
@@ -51,8 +51,8 @@ spec:
   parentRefs:
     - group: gateway.networking.k8s.io
       kind: Gateway
-      name: kafka-gateway
-      namespace: kafka-cluster
+      name: cluster-gateway
+      namespace: infra
       sectionName: kafka-listener
   rules:
     - backendRefs:
@@ -72,8 +72,8 @@ spec:
   parentRefs:
     - group: gateway.networking.k8s.io
       kind: Gateway
-      name: kafka-gateway
-      namespace: kafka-cluster
+      name: cluster-gateway
+      namespace: infra
       sectionName: kafka-listener
   rules:
     - backendRefs:

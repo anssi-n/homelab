@@ -5,6 +5,6 @@ kind: Kustomization
 resources:
   - tls/
   - kafka-cluster/
-  - EFK-stack/
+  # - EFK-stack/
   - image-updater/
   - gateway/

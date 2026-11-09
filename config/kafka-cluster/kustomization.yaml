@@ -6,6 +6,5 @@ resources:
   - certificate.yaml
   - cluster.yaml
   - nodepools.yaml
-  - gateway.yaml
   - tls-routes.yaml
   - user.yaml
