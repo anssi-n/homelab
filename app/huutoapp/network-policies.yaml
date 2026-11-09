@@ -37,7 +37,7 @@ spec:
     # Traffic from gateway api
     - fromEndpoints:
         - matchLabels:
-            io.kubernetes.pod.namespace: envoy-gateway
+            io.kubernetes.pod.namespace: infra
       toPorts:
         - ports:
             - port: "8000"
@@ -159,7 +159,7 @@ spec:
     # Traffic from gateway api
     - fromEndpoints:
         - matchLabels:
-            io.kubernetes.pod.namespace: envoy-gateway
+            io.kubernetes.pod.namespace: infra
       toPorts:
         - ports:
             - port: "5432"
@@ -224,7 +224,7 @@ spec:
     # Traffic from gateway api
     - fromEndpoints:
         - matchLabels:
-            io.kubernetes.pod.namespace: envoy-gateway
+            io.kubernetes.pod.namespace: infra
       toPorts:
         - ports:
             - port: "6379"
