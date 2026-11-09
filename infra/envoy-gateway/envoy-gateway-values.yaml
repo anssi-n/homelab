@@ -1,3 +1,10 @@
+config:
+  envoyGateway:
+    provider:
+      type: Kubernetes
+      kubernetes:
+        deploy:
+          type: GatewayNamespace
 deployment:
   replicas: 2
   pod:
