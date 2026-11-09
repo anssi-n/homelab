@@ -5,8 +5,8 @@ resources:
   - namespace.yaml
   - helm-repository.yaml
   - helm-release.yaml
-  - gateway.yaml
+  # - gateway.yaml
   - httproute.yaml
   - basic-auth.yaml
-  - longhorn-tls-secret.yaml
+  # - longhorn-tls-secret.yaml
   - no-replicas-storage-class.yaml

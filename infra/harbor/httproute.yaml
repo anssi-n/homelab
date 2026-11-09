@@ -7,8 +7,9 @@ spec:
   parentRefs:
     - group: gateway.networking.k8s.io
       kind: Gateway
-      name: harbor-gateway
-      sectionName: https
+      name: cluster-gateway
+      namespace: infra
+      sectionName: harbor-https
   rules:
     - matches:
         - path:

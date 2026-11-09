@@ -5,9 +5,11 @@ metadata:
   namespace: jenkins
 spec:
   parentRefs:
-    - name: jenkins-gateway
-      sectionName: https
+    - group: gateway.networking.k8s.io
       kind: Gateway
+      name: cluster-gateway
+      namespace: infra
+      sectionName: jenkins-https
 
   rules:
     - matches:
