@@ -7,7 +7,7 @@ resources:
   - cluster.yaml
   - redis.yaml
   - database.yaml
-  - gateway.yaml
+  # - gateway.yaml
   - db-tcproute.yaml
   #- huutoapp-tls-secret.yaml
   - huutoapp-httproute.yaml
