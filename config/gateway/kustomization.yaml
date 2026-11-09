@@ -4,3 +4,4 @@ resources:
   - namespace.yaml
   - tls-secret.yaml
   - ai-gateway.yaml
+  - cluster-gateway.yaml
