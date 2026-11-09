@@ -1,44 +1,44 @@
-apiVersion: gateway.networking.k8s.io/v1alpha2
+apiVersion: gateway.networking.k8s.io/v1
 kind: TLSRoute
 metadata:
   name: kafka-cluster-broker-10
   namespace: kafka-cluster
 spec:
   hostnames:
-  - kafka-broker-10.kafka.k8s.anyman.homelab
+    - kafka-broker-10.kafka.k8s.anyman.homelab
   parentRefs:
-  - group: gateway.networking.k8s.io
-    kind: Gateway
-    name: kafka-gateway
-    namespace: kafka-cluster
-    sectionName: kafka-listener
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: kafka-gateway
+      namespace: kafka-cluster
+      sectionName: kafka-listener
   rules:
-  - backendRefs:
-    - group: ""
-      kind: Service
-      name: kafka-cluster-broker-homelab-10
-      port: 9092
+    - backendRefs:
+        - group: ""
+          kind: Service
+          name: kafka-cluster-broker-homelab-10
+          port: 9092
 ---
-apiVersion: gateway.networking.k8s.io/v1alpha2
+apiVersion: gateway.networking.k8s.io/v1
 kind: TLSRoute
 metadata:
   name: kafka-cluster-broker-11
   namespace: kafka-cluster
 spec:
   hostnames:
-  - kafka-broker-11.kafka.k8s.anyman.homelab
+    - kafka-broker-11.kafka.k8s.anyman.homelab
   parentRefs:
-  - group: gateway.networking.k8s.io
-    kind: Gateway
-    name: kafka-gateway
-    namespace: kafka-cluster
-    sectionName: kafka-listener
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: kafka-gateway
+      namespace: kafka-cluster
+      sectionName: kafka-listener
   rules:
-  - backendRefs:
-    - group: ""
-      kind: Service
-      name: kafka-cluster-broker-homelab-11
-      port: 9092
+    - backendRefs:
+        - group: ""
+          kind: Service
+          name: kafka-cluster-broker-homelab-11
+          port: 9092
 ---
 apiVersion: gateway.networking.k8s.io/v1alpha2
 kind: TLSRoute
@@ -47,19 +47,19 @@ metadata:
   namespace: kafka-cluster
 spec:
   hostnames:
-  - kafka-broker-12.kafka.k8s.anyman.homelab
+    - kafka-broker-12.kafka.k8s.anyman.homelab
   parentRefs:
-  - group: gateway.networking.k8s.io
-    kind: Gateway
-    name: kafka-gateway
-    namespace: kafka-cluster
-    sectionName: kafka-listener
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: kafka-gateway
+      namespace: kafka-cluster
+      sectionName: kafka-listener
   rules:
-  - backendRefs:
-    - group: ""
-      kind: Service
-      name: kafka-cluster-broker-homelab-12
-      port: 9092
+    - backendRefs:
+        - group: ""
+          kind: Service
+          name: kafka-cluster-broker-homelab-12
+          port: 9092
 ---
 apiVersion: gateway.networking.k8s.io/v1alpha2
 kind: TLSRoute
@@ -68,16 +68,16 @@ metadata:
   namespace: kafka-cluster
 spec:
   hostnames:
-  - kafka-bootstrap.kafka.k8s.anyman.homelab
+    - kafka-bootstrap.kafka.k8s.anyman.homelab
   parentRefs:
-  - group: gateway.networking.k8s.io
-    kind: Gateway
-    name: kafka-gateway
-    namespace: kafka-cluster
-    sectionName: kafka-listener
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: kafka-gateway
+      namespace: kafka-cluster
+      sectionName: kafka-listener
   rules:
-  - backendRefs:
-    - group: ""
-      kind: Service
-      name: kafka-cluster-kafka-homelab-bootstrap
-      port: 9092
+    - backendRefs:
+        - group: ""
+          kind: Service
+          name: kafka-cluster-kafka-homelab-bootstrap
+          port: 9092
