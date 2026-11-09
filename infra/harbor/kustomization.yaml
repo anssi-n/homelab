@@ -6,7 +6,6 @@ resources:
   - external-secrets.yaml
   - helm-repository.yaml
   - helm-release.yaml
-  #  - gateway.yaml
   - httproute.yaml
 
 configMapGenerator:
