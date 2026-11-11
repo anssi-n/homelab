@@ -49,7 +49,7 @@ spec:
           secret:
             secretName: huutoapp-dynamic-creds
       containers: # Image versions is updated by flux
-        - image: harbor.anyman.homelab/huutoapp/huutoworker:0.4.11@sha256:42b4cf3735c55714f14da31872d0afc42e990e125adc3d3818006b1460d140c5 # {"$imagepolicy": "flux-system:huutoworker"}
+        - image: harbor.anyman.homelab/huutoapp/huutoworker:0.4.12@sha256:7587b80815261d8fd09d2cc2c6062f4385e2aafdf5d947c87a8cab69cbfbe6a4 # {"$imagepolicy": "flux-system:huutoworker"}
           name: huutoworker
           imagePullPolicy: Always
           resources:
