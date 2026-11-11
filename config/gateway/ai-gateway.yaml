@@ -23,6 +23,24 @@ spec:
               labelSelector:
                 matchLabels:
                   gateway.networking.k8s.io/gateway-class-name: agentgateway
+          volumes:
+            - name: homelab-ca
+              secret:
+                defaultMode: 420
+                secretName: keycloak-ca-cert
+                items:
+                  - key: ca.crt
+                    path: c3c5bfd3.0
+          containers:
+            - name: agentgateway
+              volumeMounts:
+                - name: homelab-ca
+                  mountPath: /etc/homelab-ca
+                  readOnly: true
+  env:
+    - name: SSL_CERT_DIR
+      value: /etc/homelab-ca
+
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway

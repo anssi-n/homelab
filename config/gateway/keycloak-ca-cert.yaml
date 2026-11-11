@@ -1,0 +1,19 @@
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: keycloak-ca-cert
+  namespace: infra
+spec:
+  data:
+    - remoteRef:
+        key: keycloak
+        property: keycloak-ca-cert
+      secretKey: ca.crt
+  refreshInterval: 1h0m0s
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: vault-backend
+  target:
+    creationPolicy: Owner
+    deletionPolicy: Delete
+    name: keycloak-ca-cert

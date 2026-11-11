@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - tls-secret.yaml
+  - keycloak-ca-cert.yaml
   - ai-gateway.yaml
   - jenkins-clienttrafficpolicy.yaml
   - cluster-gateway.yaml
