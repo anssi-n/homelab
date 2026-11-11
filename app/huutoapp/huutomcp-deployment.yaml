@@ -60,7 +60,7 @@ spec:
                 - ALL
           envFrom:
             - configMapRef:
-                name: huutomcp-config-v1.0
+                name: huutomcp-config-v1.1
             - secretRef:
                 name: huutoapp-secrets
           env:
