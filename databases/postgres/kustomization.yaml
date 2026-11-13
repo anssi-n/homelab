@@ -4,4 +4,5 @@ namespace: cnpg-system
 resources:
   - namespace.yaml
   - helm-repository.yaml
-  - helm-release.yaml
+  - cnpg-helm-release.yaml
+  - barman-helm-release.yaml
