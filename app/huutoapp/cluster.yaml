@@ -7,6 +7,12 @@ metadata:
 spec:
   instances: 3
   primaryUpdateStrategy: unsupervised
+  plugins:
+    - enabled: true
+      isWALArchiver: true
+      name: barman-cloud.cloudnative-pg.io
+      parameters:
+        barmanObjectName: huutoapp-db-s3
   storage:
     storageClass: local-path
     size: 50Mi

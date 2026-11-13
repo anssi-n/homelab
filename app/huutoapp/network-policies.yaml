@@ -308,3 +308,23 @@ spec:
     - toEntities:
         - world
         - cluster
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: allow-db-s3-egress
+  namespace: huutoapp
+spec:
+  description: Allow DB pods to reach the S3 backup bucket
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/instance: huutoapp-db
+  egress:
+    - toFQDNs:
+        - matchName: s3.eu-north-1.amazonaws.com
+        - matchPattern: "*.s3.eu-north-1.amazonaws.com"
+        - matchName: s3-r-w.eu-north-1.amazonaws.com
+      toPorts:
+        - ports:
+            - port: "443"
+              protocol: TCP
