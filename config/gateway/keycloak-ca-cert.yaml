@@ -15,5 +15,5 @@ spec:
     name: vault-backend
   target:
     creationPolicy: Owner
-    deletionPolicy: Delete
+    deletionPolicy: Retain
     name: keycloak-ca-cert

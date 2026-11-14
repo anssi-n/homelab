@@ -10,7 +10,7 @@ spec:
     kind: ClusterSecretStore
   target:
     name: basic-auth
-    deletionPolicy: Delete
+    deletionPolicy: Retain
   data:
     - secretKey: .htpasswd
       remoteRef:

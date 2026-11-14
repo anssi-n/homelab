@@ -10,7 +10,7 @@ spec:
     kind: ClusterSecretStore
   target:
     name: keycloak-ca-cert
-    deletionPolicy: Delete
+    deletionPolicy: Retain
   data:
     - secretKey: ca.crt
       remoteRef:
