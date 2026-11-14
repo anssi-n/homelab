@@ -328,3 +328,22 @@ spec:
         - ports:
             - port: "443"
               protocol: TCP
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: allow-db-apiserver-status
+  namespace: huutoapp
+spec:
+  description: Allow kube-apiserver pod proxy to the CNPG instance manager status port
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/instance: huutoapp-db
+  ingress:
+    - fromEntities:
+        - kube-apiserver
+        - remote-node # actual source is the node's cilium_host
+      toPorts:
+        - ports:
+            - port: "8000"
+              protocol: TCP
