@@ -9,7 +9,7 @@ metadata:
   labels:
     recurring-job.longhorn.io/source: enabled
     recurring-job.longhorn.io/huutoapi-images-backup: enabled
-    recurring-job.longhorn.io/huutoapi-images-trim: enabled
+    recurring-job.longhorn.io/weekly-filesystem-trim: enabled
 spec:
   accessModes:
     - ReadWriteMany
