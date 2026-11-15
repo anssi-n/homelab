@@ -8,3 +8,5 @@ resources:
   - httproute.yaml
   - basic-auth.yaml
   - no-replicas-storage-class.yaml
+  - filesystem-trim.yaml
+  - backup-credentials.yaml

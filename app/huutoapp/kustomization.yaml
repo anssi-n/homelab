@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: huutoapp
 resources:
   - namespace.yaml
+  - huutoapp-images-pvc.yaml
   - huutoapp-db-secret.yaml
   - cluster.yaml
   - redis.yaml
