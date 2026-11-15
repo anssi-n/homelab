@@ -1,3 +1,4 @@
+---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -5,6 +6,10 @@ metadata:
   namespace: huutoapp
   annotations:
     kustomize.toolkit.fluxcd.io/prune: disabled
+  labels:
+    recurring-job.longhorn.io/source: enabled
+    recurring-job.longhorn.io/huutoapi-images-backup: enabled
+    recurring-job.longhorn.io/huutoapi-images-trim: enabled
 spec:
   accessModes:
     - ReadWriteMany
@@ -13,3 +18,19 @@ spec:
   resources:
     requests:
       storage: 2Gi
+---
+apiVersion: longhorn.io/v1beta2
+kind: RecurringJob
+metadata:
+  name: huutoapi-images-backup
+  namespace: longhorn-system
+spec:
+  cron: "0 11 * * *"
+  task: backup
+  retentionPolicy: count-based
+  retain: 3
+  concurrency: 1
+  labels:
+    app: huutoapi
+  parameters:
+    full-backup-interval: "7"
