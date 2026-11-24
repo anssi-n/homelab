@@ -1,0 +1,16 @@
+---
+apiVersion: longhorn.io/v1beta2
+kind: RecurringJob
+metadata:
+  name: jenkins-backup
+  namespace: longhorn-system
+spec:
+  cron: "0 18 * * 1"
+  task: backup
+  retentionPolicy: count-based
+  retain: 4
+  concurrency: 1
+  labels:
+    app: jenkins
+  parameters:
+    full-backup-interval: "4"

@@ -45,6 +45,9 @@ spec:
     persistence:
       enabled: true
       storageClass: "longhorn-no-replicas"
+      labels:
+        recurring-job.longhorn.io/source: enabled
+        recurring-job.longhorn.io/jenkins-backup: enabled
       size: 10Gi
       accessMode: ReadWriteOnce
     serviceAccount:
