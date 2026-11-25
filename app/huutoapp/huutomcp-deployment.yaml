@@ -42,7 +42,7 @@ spec:
         runAsUser: 1000
       serviceAccountName: huutomcp-sa
       containers:
-        - image: harbor.anyman.homelab/huutoapp/huutomcp@sha256:3851432a223695fadfc93048ca33077cf785b6aa9c489f448332ffafcf0a2b81 # {"$imagepolicy": "flux-system:huutomcp"}
+        - image: harbor.anyman.homelab/huutoapp/huutomcp:0.4.12@sha256:413fba3fcc24351e4be8c80842b747cc73e16223497be4fa4e25f20119cee717 # {"$imagepolicy": "flux-system:huutomcp"}
           name: huutomcp
           imagePullPolicy: Always
           resources:
