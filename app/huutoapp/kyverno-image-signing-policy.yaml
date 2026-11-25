@@ -7,8 +7,8 @@ metadata:
 data:
   cosign.pub: |
     -----BEGIN PUBLIC KEY-----
-    MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE54Fe70gjCdDCOdAyZGAxTHn51P7c
-    DC6bSJSpq+Ejm1ZXLk2Qsfb8O0CNvAyCVoUMvUOmb85g2WNbQi10qQFdhQ==
+    MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEM/eamHCX5NU23vWPwBExYaK3LmH5
+    MvJym6nvWPAAGrlkMoAxqD9KV5075LjnuziQ3Oo4kT71ogDYcWf3qMpp+w==
     -----END PUBLIC KEY-----
 ---
 apiVersion: policies.kyverno.io/v1
